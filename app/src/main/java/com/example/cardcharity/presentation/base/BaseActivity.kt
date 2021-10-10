@@ -7,11 +7,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.cardcharity.R
+import com.example.cardcharity.presentation.appearence.ThemeActivity
 import com.example.cardcharity.presentation.appearence.ThemeController
 
 abstract class BaseActivity<VDB : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
-    AppCompatActivity() {
-    lateinit var theme: ThemeController.Theme
+    AppCompatActivity(), ThemeActivity {
+    override var theme: ThemeController.Theme = ThemeController.Theme.DAY
     protected lateinit var binding: VDB
 
     private var _toolbar: Toolbar? = null
@@ -31,9 +32,6 @@ abstract class BaseActivity<VDB : ViewDataBinding>(@LayoutRes private val layout
         super.onStart()
     }
 
-    open fun themeActivity(): Pair<Int, Int> {
-        return Pair(R.style.Theme_CardCharity_Day, R.style.Theme_CardCharity_Night)
-    }
 
     fun setupToolbar(toolbar: Toolbar) {
         _toolbar = toolbar
@@ -47,5 +45,13 @@ abstract class BaseActivity<VDB : ViewDataBinding>(@LayoutRes private val layout
 
     fun invalidateBinding() {
         binding.invalidateAll()
+    }
+
+    override fun getDayThemeResId(): Int {
+        return R.style.Theme_CardCharity_Day
+    }
+
+    override fun getNightThemeResId(): Int {
+        return R.style.Theme_CardCharity_Night
     }
 }

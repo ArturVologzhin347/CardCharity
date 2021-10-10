@@ -54,6 +54,9 @@ android {
 }
 
 dependencies {
+    //RecyclerView animations
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
+
     //MultiDex
     implementation "com.android.support:multidex:2.0.1"
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import androidx.annotation.StyleRes
+import androidx.appcompat.app.AppCompatActivity
 import com.example.cardcharity.presentation.base.BaseActivity
 import com.example.cardcharity.repository.preferences.Preferences
 
@@ -17,12 +18,14 @@ object ThemeController {
         theme = getCurrentTheme(context)
     }
 
-    fun observe(activity: BaseActivity<*>) {
+    fun observe(activity: ThemeActivity) {
         activity.setTheme(getThemeFromActivity(activity))
         activity.theme = theme
     }
 
-    fun invalidate(activity: BaseActivity<*>) {
+    fun invalidate(activity: ThemeActivity) {
+        activity as AppCompatActivity
+
         val currentTheme = getCurrentTheme(activity)
         if (activity.theme != currentTheme) {
             theme = currentTheme
@@ -53,11 +56,10 @@ object ThemeController {
     }
 
     @StyleRes
-    private fun getThemeFromActivity(activity: BaseActivity<*>): Int {
-        val themes = activity.themeActivity()
+    private fun getThemeFromActivity(activity: ThemeActivity): Int {
         return when(theme) {
-            Theme.DAY -> themes.first
-            Theme.NIGHT -> themes.second
+            Theme.DAY -> activity.getDayThemeResId()
+            Theme.NIGHT -> activity.getNightThemeResId()
         }
     }
 

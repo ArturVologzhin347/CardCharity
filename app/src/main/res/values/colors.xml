@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <color name="accent">#CC0033</color>
-   <color name="dark_grey">#302F2D</color>
-   <color name="light_grey">#FFFAEF</color>
+    <color name="tory_blue">#0D47A1</color>
+    <color name="indigo">#5472D3</color>
+    <color name="catalina_blue">#002171</color>
 
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="periwinkle_gray">#2196f3</color>
+    <color name="twilight_blue">#6ec6ff</color>
+    <color name="santas_gray">#0069c0</color>
+
+    <color name="zircon">#FCFDFF</color>
+
+    <color name="mirage">#1A242E</color>
+    <color name="big_stone">#212D3B</color>
+    <color name="mirage_light">#1D2733</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
 
     <color name="transparent">#00000000</color>
-    <color name="white_alpha_">#FFFFFFFF</color>
 
 
     <!--

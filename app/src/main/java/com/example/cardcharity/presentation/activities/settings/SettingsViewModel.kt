@@ -25,7 +25,6 @@ class SettingsViewModel(application: Application) : BaseViewModel(application) {
             val newState = if (isChecked) {
                 ThemeController.ThemeState.AUTO
             } else {
-                //TODO
                 ThemeController.getSystemTheme(context).state
             }
             ThemeController.setupNewThemeState(newState)

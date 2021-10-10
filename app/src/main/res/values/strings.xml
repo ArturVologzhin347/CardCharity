@@ -6,11 +6,15 @@
     <string name="about_app">О приложении</string>
 
     <string name="more">Ещё</string>
+    <string name="select_shop">Выберите магазин:</string>
+
+    <string name="shop_barcode">Покажите штрих-код кассиру</string>
 
 
     <string name="appearance">Внешний вид</string>
     <string name="night_mode">Ночная тема</string>
     <string name="night_mode_auto">Синхронизация с темой Android</string>
     <string name="night_mode_auto_subtitle">Только для версий Q или выше</string>
+    <string name="brightness_barcode">Подсвечивать штрих-код</string>
 
 </resources>

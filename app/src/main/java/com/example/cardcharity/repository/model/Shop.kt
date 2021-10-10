@@ -1,7 +1,10 @@
 package com.example.cardcharity.repository.model
 
+import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
+import com.bumptech.glide.RequestBuilder
+import com.example.cardcharity.repository.network.NetworkService
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -35,6 +38,13 @@ class Shop() : Parcelable {
         set(value) {
             _imageUrl = value
         }
+
+    val qrUrl: String
+        get() = "${NetworkService.BASE_URL}${NetworkService.URL_QR_CODE}$id"
+
+    override fun toString(): String {
+        return "Id - $_id \nName - $_name \nId - $_imageUrl"
+    }
 
     constructor(parcel: Parcel) : this() {
         _id = parcel.readValue(Int::class.java.classLoader) as? Int

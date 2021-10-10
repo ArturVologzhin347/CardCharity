@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="color_accent" format="color" />
-    <attr name="color_surface" format="color" />
-    <attr name="color_on_surface" format="color" />
-
+    <attr name="color_background" format="color" />
+    <attr name="color_on_background" format="color" />
+    <attr name="color_toolbar" format="color" />
+    <attr name="color_toolbar_title" format="color" />
 </resources>

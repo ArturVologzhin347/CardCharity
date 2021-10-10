@@ -29,14 +29,6 @@
             android:name=".presentation.activities.settings.SettingsActivity"
             android:exported="true" />
 
-        <activity
-            android:name=".presentation.activities.about.AboutActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".presentation.activities.result.ResultActivity"
-            android:exported="true" />
-
     </application>
 
 </manifest>
