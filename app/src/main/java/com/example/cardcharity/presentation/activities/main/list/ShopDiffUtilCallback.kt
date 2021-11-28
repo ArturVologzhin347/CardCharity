@@ -41,10 +41,9 @@ class ShopDiffUtilCallback(
             ModelType.MODEL -> {
                 val oldShop = oldItem.shop!!
                 val newShop = newItem.shop!!
-                oldShop.id == newShop.id &&
-                        oldShop.name == newShop.name &&
-                        oldShop.imageUrl == newShop.imageUrl
+                oldShop.id == newShop.id && oldShop.name == newShop.name
             }
+
             ModelType.TITLE -> oldItem.title == newItem.title
         }
     }

@@ -1,14 +1,24 @@
 <resources>
+    <string name="web_client_id"> 915924360160-k3kj8bsij41ei8unc9glqjarrs841ete.apps.googleusercontent.com</string>
     <string name="app_name">Card Charity</string>
-
 
     <string name="settings">Настройки</string>
     <string name="about_app">О приложении</string>
 
     <string name="more">Ещё</string>
+    <string name="next">Продолжить</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Назад</string>
+    <string name="sure">Уверены?</string>
     <string name="select_shop">Выберите магазин:</string>
 
     <string name="shop_barcode">Покажите штрих-код кассиру</string>
+
+
+    <string name="login_with_google">Войти через Google</string>
+
+
+    <string name="welcome_to_card_charity">Добро пожаловать в Card Charity!</string>
 
 
     <string name="appearance">Внешний вид</string>
@@ -16,5 +26,11 @@
     <string name="night_mode_auto">Синхронизация с темой Android</string>
     <string name="night_mode_auto_subtitle">Только для версий Q или выше</string>
     <string name="brightness_barcode">Подсвечивать штрих-код</string>
+    <string name="account">Профиль</string>
+
+    <string name="sign_out">Выйти</string>
+    <string name="logout">Выйти из аккаунта</string>
+    <string name="refresh">Обновить</string>
+    <string name="internet_connection_error">Нет подключения к Интернету</string>
 
 </resources>

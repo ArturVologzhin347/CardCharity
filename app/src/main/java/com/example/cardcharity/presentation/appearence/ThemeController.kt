@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cardcharity.presentation.base.BaseActivity
 import com.example.cardcharity.repository.preferences.Preferences
 
 object ThemeController {
@@ -18,27 +17,28 @@ object ThemeController {
         theme = getCurrentTheme(context)
     }
 
-    fun observe(activity: ThemeActivity) {
-        activity.setTheme(getThemeFromActivity(activity))
-        activity.theme = theme
+    fun observe(supporter: ThemeSupporter) {
+        supporter.setTheme(getThemeFromSupporter(supporter))
+        supporter.theme = theme
     }
 
-    fun invalidate(activity: ThemeActivity) {
-        activity as AppCompatActivity
+    fun invalidate(supporter: ThemeSupporter) {
+        supporter as AppCompatActivity
 
-        val currentTheme = getCurrentTheme(activity)
-        if (activity.theme != currentTheme) {
+        val currentTheme = getCurrentTheme(supporter)
+        if (supporter.theme != currentTheme) {
             theme = currentTheme
 
-            activity.startActivity(Intent(activity, activity::class.java))
-            activity.finish()
-            activity.overridePendingTransition(
+            supporter.startActivity(Intent(supporter, supporter::class.java))
+            supporter.finish()
+            supporter.overridePendingTransition(
                 android.R.anim.fade_in,
                 android.R.anim.fade_out
             )
         }
     }
 
+    //TODO
     //Use invalidate() after
     fun setupNewThemeState(state: ThemeState) {
         Preferences.theme = state.name
@@ -56,10 +56,10 @@ object ThemeController {
     }
 
     @StyleRes
-    private fun getThemeFromActivity(activity: ThemeActivity): Int {
+    private fun getThemeFromSupporter(supporter: ThemeSupporter): Int {
         return when(theme) {
-            Theme.DAY -> activity.getDayThemeResId()
-            Theme.NIGHT -> activity.getNightThemeResId()
+            Theme.DAY -> supporter.getDayThemeResId()
+            Theme.NIGHT -> supporter.getNightThemeResId()
         }
     }
 
@@ -78,7 +78,6 @@ object ThemeController {
             Theme.DAY
         }
     }
-
 
     enum class ThemeState {
         DAY,

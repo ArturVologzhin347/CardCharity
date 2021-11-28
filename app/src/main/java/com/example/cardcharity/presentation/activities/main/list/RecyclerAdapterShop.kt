@@ -6,13 +6,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cardcharity.R
+import com.example.cardcharity.domen.BindingInflater
 import com.example.cardcharity.presentation.activities.main.list.holder.ViewHolderShop
 import com.example.cardcharity.presentation.activities.main.list.holder.ViewHolderTitle
 import com.example.cardcharity.presentation.base.BaseRecyclerAdapter
 import com.example.cardcharity.presentation.component.recyclerview.sticky.StickyHeaderDecoration
-import com.example.cardcharity.utils.BindingInflater
 
-class RecyclerAdapterShop() :
+class RecyclerAdapterShop :
     BaseRecyclerAdapter<ModelShop, ViewHolderModelShop<*>>(),
     StickyHeaderDecoration.StickyHeaderInterface<ModelShop, ViewHolderTitle> {
     private var mModels = listOf<ModelShop>()
@@ -31,15 +31,6 @@ class RecyclerAdapterShop() :
     }
 
     override fun onBindViewHolder(holder: ViewHolderModelShop<*>, position: Int, item: ModelShop) {
-        when (holder) {
-            is ViewHolderShop -> {
-
-            }
-
-            is ViewHolderTitle -> {
-
-            }
-        }
         holder.bind(item)
     }
 

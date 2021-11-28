@@ -19,7 +19,7 @@ class App : Application() {
         }
 
         initializeSharedPreferences()
-        initializeDefaultSharedProperties()
+        Preferences.initializeDefaultPreferences()
         ThemeController.initialize(this)
     }
 
@@ -33,22 +33,6 @@ class App : Application() {
         preferencesHelper = PreferencesHelper(PREFERENCES_KEY, preferences)
     }
 
-    private fun initializeDefaultSharedProperties() {
-        val hasVisited = Preferences.hasVisited
-        if(!hasVisited) {
-
-            //Default theme
-            val defaultThemeState = if(android.os.Build.VERSION.SDK_INT
-                >= android.os.Build.VERSION_CODES.Q) {
-                ThemeController.ThemeState.NIGHT
-            } else {
-                ThemeController.ThemeState.DAY
-            }
-
-            Preferences.theme = defaultThemeState.name
-            Preferences.hasVisited = true
-        }
-    }
 
 
     companion object {

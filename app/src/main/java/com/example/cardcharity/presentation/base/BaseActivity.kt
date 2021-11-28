@@ -7,11 +7,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.cardcharity.R
-import com.example.cardcharity.presentation.appearence.ThemeActivity
+import com.example.cardcharity.presentation.appearence.ThemeSupporter
 import com.example.cardcharity.presentation.appearence.ThemeController
 
 abstract class BaseActivity<VDB : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
-    AppCompatActivity(), ThemeActivity {
+    AppCompatActivity(), ThemeSupporter {
     override var theme: ThemeController.Theme = ThemeController.Theme.DAY
     protected lateinit var binding: VDB
 

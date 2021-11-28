@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "915924360160",
+    "project_id": "card-charity",
+    "storage_bucket": "card-charity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915924360160:android:c43dfcf62880fba32ae985",
+        "android_client_info": {
+          "package_name": "com.example.cardcharity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915924360160-k3kj8bsij41ei8unc9glqjarrs841ete.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnMuA0ZXBlF4LoVocZp0HM9XEOzhrjxzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915924360160-k3kj8bsij41ei8unc9glqjarrs841ete.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

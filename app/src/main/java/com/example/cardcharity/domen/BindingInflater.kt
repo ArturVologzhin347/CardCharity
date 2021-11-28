@@ -1,6 +1,5 @@
-package com.example.cardcharity.utils
+package com.example.cardcharity.domen
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
 class BindingInflater(container: ViewGroup) {
-    private val mContainer: ViewGroup = container
-    private val mContext: Context = mContainer.context
-    private val mLayoutInflater: LayoutInflater = LayoutInflater.from(mContext)
+    private val mContainer = container
+    private val mContext = mContainer.context
+    private val mLayoutInflater = LayoutInflater.from(mContext)
 
     fun view(@LayoutRes layoutResId: Int): View {
         return mLayoutInflater.inflate(layoutResId, mContainer, false)

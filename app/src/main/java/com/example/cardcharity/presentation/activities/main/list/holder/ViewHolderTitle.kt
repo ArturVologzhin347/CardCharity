@@ -10,7 +10,7 @@ class ViewHolderTitle(binding: ActivityMainListItemTitleBinding) :
 
     override fun bind(model: ModelShop) {
         if(model.type != ModelType.TITLE) {
-            throw IllegalArgumentException("Model must be type TITLE")
+            throw IllegalArgumentException("Model must be type ${ModelType.TITLE.name}")
         }
 
         val title = model.title!!

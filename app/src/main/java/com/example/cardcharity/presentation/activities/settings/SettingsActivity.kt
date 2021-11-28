@@ -9,6 +9,7 @@ import com.example.cardcharity.R
 import com.example.cardcharity.databinding.ActivitySettingsBinding
 import com.example.cardcharity.presentation.appearence.ThemeController
 import com.example.cardcharity.presentation.base.BaseActivity
+import com.example.cardcharity.presentation.component.dialog.Dialog
 import com.example.cardcharity.repository.preferences.Preferences
 
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity_settings) {
@@ -20,21 +21,28 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
         setDefaultNavigationAction()
 
         invalidate()
-        binding.switchNightMode.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.nightModeSwitcher(isChecked) {
-                runThemeControllerInvalidate()
-            }
-        }
 
-        binding.switchNightModeAuto.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.nightModeAutoSwitcher(isChecked) {
-                invalidate()//Refresh UI
-                runThemeControllerInvalidate()
+        binding.apply {
+            switchNightMode.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.nightModeSwitcher(isChecked) {
+                    runThemeControllerInvalidate()
+                }
             }
-        }
 
-        binding.switchBrightnessBarcode.setOnCheckedChangeListener { _, isChecked ->
-            Preferences.barcodeIllumination = isChecked
+            switchNightModeAuto.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.nightModeAutoSwitcher(isChecked) {
+                    invalidate()//Refresh UI
+                    runThemeControllerInvalidate()
+                }
+            }
+
+            switchBrightnessBarcode.setOnCheckedChangeListener { _, isChecked ->
+                Preferences.barcodeIllumination = isChecked
+            }
+
+            buttonSignOut.setOnClickListener {
+                Dialog.callSignOut(this@SettingsActivity)
+            }
         }
     }
 

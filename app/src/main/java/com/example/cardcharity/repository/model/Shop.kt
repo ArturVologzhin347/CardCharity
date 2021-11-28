@@ -1,10 +1,8 @@
 package com.example.cardcharity.repository.model
 
-import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
-import com.bumptech.glide.RequestBuilder
-import com.example.cardcharity.repository.network.NetworkService
+import com.example.cardcharity.repository.network.RetrofitService
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -16,10 +14,6 @@ class Shop() : Parcelable {
     @SerializedName("name")
     @Expose
     private var _name: String? = null
-
-    @SerializedName("image")
-    @Expose
-    private var _imageUrl: String? = null
 
     var id: Int
         get() = _id!!
@@ -33,29 +27,26 @@ class Shop() : Parcelable {
             _name = value
         }
 
-    var imageUrl: String
-        get() = _imageUrl!!
-        set(value) {
-            _imageUrl = value
-        }
+    fun getLogoUrl(): String {
+        return "${RetrofitService.URL}user/shop/$id/logo"
+    }
 
-    val qrUrl: String
-        get() = "${NetworkService.BASE_URL}${NetworkService.URL_QR_CODE}$id"
+    fun getCodeUrl(uid: String): String {
+        return "${RetrofitService.URL}user/code/?shopId=$id&uid=$uid"
+    }
 
     override fun toString(): String {
-        return "Id - $_id \nName - $_name \nId - $_imageUrl"
+        return "Id - $_id \nName - $_name \n"
     }
 
     constructor(parcel: Parcel) : this() {
         _id = parcel.readValue(Int::class.java.classLoader) as? Int
         _name = parcel.readString()
-        _imageUrl = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(_id)
         parcel.writeString(_name)
-        parcel.writeString(_imageUrl)
     }
 
     override fun describeContents(): Int {

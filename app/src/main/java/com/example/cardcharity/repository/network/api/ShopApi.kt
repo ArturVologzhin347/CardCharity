@@ -6,9 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ShopApi {
-    @GET("/shop/")
+    @GET("/user/shop")
     fun getAllShops(): Call<List<Shop>>
-
-    @GET("/shop/{id}")
-    fun getShopById(@Path("id") id: Int): Call<List<Shop>>
 }

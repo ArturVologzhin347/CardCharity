@@ -5,7 +5,7 @@ import androidx.core.content.edit
 
 class PreferencesHelper (key: String, preferences: SharedPreferences) {
     private val mPreferences = preferences
-    val preferencesKey = key
+    private val preferencesKey = key
 
     fun setString(key: String, item: String?) {
         edit { it.putString(key, item) }

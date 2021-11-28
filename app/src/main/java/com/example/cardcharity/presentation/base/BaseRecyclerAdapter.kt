@@ -2,7 +2,7 @@ package com.example.cardcharity.presentation.base
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cardcharity.utils.BindingInflater
+import com.example.cardcharity.domen.BindingInflater
 
 abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
     private var _bindingInflater: BindingInflater? = null

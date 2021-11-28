@@ -29,8 +29,12 @@
         <!-- Attrs -->
         <item name="color_background">@color/zircon</item>
         <item name="color_on_background">@color/black</item>
+        <item name="color_surface">@color/white</item>
+        <item name="color_on_surface">@color/black</item>
         <item name="color_toolbar">@color/tory_blue</item>
         <item name="color_toolbar_title">@color/white</item>
+        <item name="color_divider">@color/divider_dark</item>
+        <item name="color_error">@color/shiraz</item>
 
         <!--Component styles-->
         <item name="toolbarStyle">@style/ToolBar.Day</item>
@@ -56,12 +60,36 @@
         <!-- Attrs -->
         <item name="color_background">@color/mirage_light</item>
         <item name="color_on_background">@color/white</item>
+        <item name="color_surface">@color/big_stone</item>
+        <item name="color_on_surface">@color/white</item>
         <item name="color_toolbar">@color/big_stone</item>
         <item name="color_toolbar_title">@color/white</item>
+        <item name="color_divider">@color/divider_light</item>
+        <item name="color_error">@color/cranberry</item>
 
         <!--Component styles-->
         <item name="toolbarStyle">@style/ToolBar.Night</item>
     </style>
+
+
+    <style name="Theme.CardCharity.Fullscreen.Day" parent="Theme.CardCharity.Day">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+    <style name="Theme.CardCharity.Fullscreen.Night" parent="Theme.CardCharity.Night">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+
 
     <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
         <item name="android:textColor">?attr/color_on_background</item>
@@ -84,7 +112,6 @@
         <item name="elevation">0dp</item>
         <item name="titleCentered">false</item>
         <item name="titleTextAppearance">@style/collapsingToolbarLayoutTitle</item>
-
     </style>
 
     <style name="collapsingToolbarLayoutTitle" parent="ToolBar.Day">
@@ -99,15 +126,14 @@
         <item name="android:textColor">?attr/color_toolbar_title</item>
     </style>
 
-    <style name="CustomBottomSheetDialog"
-        parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+    <style name="CustomBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
 
     </style>
 
     <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
         <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>
-        <item name="backgroundTint">?attr/color_background</item>
+        <item name="backgroundTint">?attr/color_surface</item>
     </style>
 
     <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
