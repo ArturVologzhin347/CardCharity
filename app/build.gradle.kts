@@ -82,7 +82,7 @@ android {
 dependencies {
 
     with(Dependencies.Firebase) {
-        implementation(bom)
+        implementation(platform(bom))
         implementation(auth)
     }
 

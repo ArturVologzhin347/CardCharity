@@ -13,11 +13,11 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CardCharity.Day"
+        android:theme="@style/Theme.AppCompose"
         tools:ignore="UnusedAttribute">
 
         <activity
-            android:name=".presentation.activities.splash.SplashActivity"
+            android:name=".presentation.activities.main.MainActivity"
             android:exported="true"
             android:noHistory="true">
             <intent-filter>
@@ -25,20 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".presentation.activities.welcome.WelcomeActivity"
-            android:noHistory="true" />
-
-        <activity
-            android:name=".presentation.activities.auth.AuthActivity"
-            android:excludeFromRecents="true"
-            android:exported="true"
-            android:noHistory="true" />
-
-        <activity android:name=".presentation.activities.main.MainActivity" />
-        <activity android:name=".presentation.activities.settings.SettingsActivity" />
-
 
     </application>
 

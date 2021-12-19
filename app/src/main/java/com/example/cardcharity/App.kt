@@ -3,10 +3,78 @@ package com.example.cardcharity
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.cardcharity.presentation.appearence.ThemeController
-import com.example.cardcharity.repository.preferences.Preferences
-import com.example.cardcharity.repository.preferences.PreferencesHelper
+
+
 import timber.log.Timber
+
+/*
+
+fun Shop.getLogoUrl(): String {
+    return "${RetrofitService.URL}user/shop/$id/logo"
+}
+
+fun Shop.getCodeUrl(uid: String): String {
+    return "${RetrofitService.URL}user/code/?shopId=$id&uid=$uid"
+}
+
+
+
+
+ @GET("/user/shop")
+    fun getAllShops(): Call<List<Shop>>
+
+
+SHOP
+ @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String
+
+
+    USER
+      val email: String,
+    val uid: String,
+    val name: String,
+    val avatar: Uri
+ */
+
+/*
+ @SuppressLint("TrustAllX509TrustManager")
+    private fun buildUnsafeHttpClient(): OkHttpClient {
+        try {
+            val trustAllCerts: Array<TrustManager> = arrayOf(
+                @SuppressLint("CustomX509TrustManager") object : X509TrustManager {
+                    override fun checkClientTrusted(
+                        chain: Array<out X509Certificate>?,
+                        authType: String?
+                    ) {
+                    }
+
+                    override fun checkServerTrusted(
+                        chain: Array<out X509Certificate>?,
+                        authType: String?
+                    ) {
+                    }
+
+                    override fun getAcceptedIssuers(): Array<X509Certificate> {
+                        return arrayOf()
+                    }
+                }
+            )
+
+            val sslClient = SSLContext.getInstance("SSL")
+            sslClient.init(null, trustAllCerts, SecureRandom())
+            val sslSocketFactory = sslClient.socketFactory
+            return OkHttpClient.Builder().apply {
+                this.sslSocketFactory(sslSocketFactory)//TODO
+                hostnameVerifier { _, _ -> true }
+                addInterceptor(interceptor)
+            }.build()
+
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+    }
+ */
+
 
 class App : Application() {
 
@@ -17,25 +85,10 @@ class App : Application() {
             Timber.plant(Timber.DebugTree())
         }
 
-        initializeSharedPreferences()
-        Preferences.initializeDefaultPreferences()
-        ThemeController.initialize(this)
     }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
     }
 
-    private fun initializeSharedPreferences() {
-        preferences = getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE)
-        preferencesHelper = PreferencesHelper(PREFERENCES_KEY, preferences)
-    }
-
-
-
-    companion object {
-        lateinit var preferences: SharedPreferences
-        lateinit var preferencesHelper: PreferencesHelper
-        private const val PREFERENCES_KEY = "Preferences"
-    }
 }
