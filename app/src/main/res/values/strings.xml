@@ -1,6 +1,16 @@
 <resources>
     <string name="web_client_id"> 915924360160-k3kj8bsij41ei8unc9glqjarrs841ete.apps.googleusercontent.com</string>
     <string name="app_name">Card Charity</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+
+    <string name="time_morning">Доброе утро</string>
+    <string name="time_afternoon">Хорошего дня</string>
+    <string name="time_evening">Добрый вечер</string>
+    <string name="time_night">Доброй ночи</string>
+    <string name="time_default">Привет</string>
+
 
     <string name="settings">Настройки</string>
     <string name="about_app">О приложении</string>
@@ -32,5 +42,7 @@
     <string name="logout">Выйти из аккаунта</string>
     <string name="refresh">Обновить</string>
     <string name="internet_connection_error">Нет подключения к Интернету</string>
+    <string name="error">Упс! Произошла неизвестная ошибка</string>
+
 
 </resources>

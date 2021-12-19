@@ -1,0 +1,41 @@
+- перенести всё на kts
+- перенести всё на compose material 2
+- переписать network service
+- DI
+- нормальные модальные классы
+- moshi
+
+
+
+
+
+
+
+
+
+
+
+
+- обучалка при старте, показывающая шо делать
+- favorite shops
+
+
+
+
+
+- выбрать анимацию для дровера
+
+
+- dividers
+- settings activity + profile activity
+- themes
+- icon
+- welcome activity
+- auth activity
+- splash activity
+- Hello, User!
+
+
+Code refactor:
+- add DI
+- recode repository, api's

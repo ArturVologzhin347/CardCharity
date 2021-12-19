@@ -5,25 +5,21 @@
 
     <data />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="?attr/color_surface"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp">
-
         <LinearLayout
+            android:id="@+id/card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/selectable_foreground">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="52dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 tools:ignore="ContentDescription" />
@@ -41,6 +37,5 @@
                 app:fontFamily="sans-serif-medium"
                 tools:text="Пятёрочка" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 </layout>
 

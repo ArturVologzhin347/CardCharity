@@ -1,6 +1,7 @@
 package com.example.cardcharity.presentation.activities.auth
 
 import android.app.Application
+import android.graphics.Point
 import com.example.cardcharity.R
 import com.example.cardcharity.presentation.base.BaseViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -18,7 +19,11 @@ class AuthViewModel(application: Application) : BaseViewModel(application) {
         }.build()
 
         googleSignInClient = GoogleSignIn.getClient(context, gso)
+
+
     }
+
+
 
 
 }

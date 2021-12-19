@@ -8,12 +8,26 @@ import android.view.View
 import androidx.annotation.AnimatorRes
 import androidx.core.view.isVisible
 import com.example.cardcharity.R
-import com.example.cardcharity.utils.loadAnimator
+import com.example.cardcharity.utils.extensions.loadAnimator
 
 class HideableManager(private val context: Context) {
     private var animatorIn = context.loadAnimator(R.animator.translation_y_alpha_in)
     private var animatorOut = context.loadAnimator(R.animator.alpha_out)
     private lateinit var anchor: View
+
+    constructor(context: Context, anchor: View): this(context) {
+        attach(anchor)
+    }
+
+    private var isVisible: Boolean = false
+
+    var hide: Boolean
+        get() = !isVisible
+        set(value) = set(value)
+
+    var show: Boolean
+        get() = isVisible
+        set(value) = set(!value)
 
     init {
         animatorOut.addListener(object : AnimatorListenerAdapter() {
@@ -29,9 +43,6 @@ class HideableManager(private val context: Context) {
             }
         })
     }
-
-    var isVisible: Boolean = false
-        private set
 
     fun attach(anchor: View) {
         this.anchor = anchor
@@ -64,11 +75,7 @@ class HideableManager(private val context: Context) {
     }
 
     fun set(hide: Boolean) {
-        if (hide) {
-            hide()
-        } else {
-            show()
-        }
+        if (hide) hide() else show()
     }
 
     private fun assertAnchor() {

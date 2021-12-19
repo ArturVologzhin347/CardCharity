@@ -12,29 +12,29 @@
     <style name="Theme.CardCharity.Day" parent="Theme.CardCharity.Base">
         <item name="colorPrimary">@color/tory_blue</item>
         <item name="colorAccent">@color/indigo</item>
+        <item name="colorError">@color/shiraz</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:colorPrimaryDark">@color/catalina_blue</item>
+        <item name="android:colorPrimaryDark">@color/zircon</item>
         <item name="android:windowBackground">@color/zircon</item>
-        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlNormal">@color/black</item>
 
         <!-- Navigation Bar -->
         <item name="android:navigationBarColor">@color/zircon</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
 
         <!--Status bar-->
-        <item name="android:statusBarColor">@color/catalina_blue</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:statusBarColor">@color/zircon</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
 
         <!-- Attrs -->
         <item name="color_background">@color/zircon</item>
         <item name="color_on_background">@color/black</item>
-        <item name="color_surface">@color/white</item>
-        <item name="color_on_surface">@color/black</item>
         <item name="color_toolbar">@color/tory_blue</item>
         <item name="color_toolbar_title">@color/white</item>
         <item name="color_divider">@color/divider_dark</item>
-        <item name="color_error">@color/shiraz</item>
 
         <!--Component styles-->
         <item name="toolbarStyle">@style/ToolBar.Day</item>
@@ -43,6 +43,9 @@
     <style name="Theme.CardCharity.Night" parent="Theme.CardCharity.Base">
         <item name="colorPrimary">@color/periwinkle_gray</item>
         <item name="colorAccent">@color/twilight_blue</item>
+        <item name="colorError">@color/cranberry</item>
+        <item name="colorSurface">@color/big_stone</item>
+        <item name="colorOnSurface">@color/white</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:colorPrimaryDark">@color/mirage</item>
@@ -60,12 +63,9 @@
         <!-- Attrs -->
         <item name="color_background">@color/mirage_light</item>
         <item name="color_on_background">@color/white</item>
-        <item name="color_surface">@color/big_stone</item>
-        <item name="color_on_surface">@color/white</item>
         <item name="color_toolbar">@color/big_stone</item>
         <item name="color_toolbar_title">@color/white</item>
         <item name="color_divider">@color/divider_light</item>
-        <item name="color_error">@color/cranberry</item>
 
         <!--Component styles-->
         <item name="toolbarStyle">@style/ToolBar.Night</item>
@@ -98,8 +98,8 @@
 
 
     <style name="ToolBar.Day" parent="Widget.MaterialComponents.Toolbar">
-        <item name="titleTextColor">@color/white</item>
-        <item name="android:background">@color/tory_blue</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="android:background">@color/zircon</item>
         <item name="elevation">0dp</item>
         <item name="titleCentered">false</item>
         <item name="titleTextAppearance">@style/collapsingToolbarLayoutTitle</item>
@@ -133,7 +133,7 @@
 
     <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
         <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>
-        <item name="backgroundTint">?attr/color_surface</item>
+        <item name="backgroundTint">?colorSurface</item>
     </style>
 
     <style name="CustomShapeAppearanceBottomSheetDialog" parent="">

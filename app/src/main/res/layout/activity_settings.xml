@@ -185,8 +185,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/sign_out"
-                    android:textColor="?attr/color_error"
-                    app:rippleColor="?attr/color_error"
+                    android:textColor="?colorError"
+                    app:rippleColor="?colorError"
                     android:layout_marginTop="56dp"/>
 
 

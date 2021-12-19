@@ -3,7 +3,6 @@ package com.example.cardcharity
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.multidex.MultiDex
 import com.example.cardcharity.presentation.appearence.ThemeController
 import com.example.cardcharity.repository.preferences.Preferences
 import com.example.cardcharity.repository.preferences.PreferencesHelper
@@ -25,7 +24,6 @@ class App : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        MultiDex.install(this)//MultiDex enabled.
     }
 
     private fun initializeSharedPreferences() {

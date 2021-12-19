@@ -18,7 +18,7 @@ abstract class BaseActivity<VDB : ViewDataBinding>(@LayoutRes private val layout
     private var _toolbar: Toolbar? = null
 
     val toolbar: Toolbar
-        get() = _toolbar!!
+        get() = checkNotNull(_toolbar) { "Use setupToolbar()" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeController.observe(this)
@@ -31,7 +31,6 @@ abstract class BaseActivity<VDB : ViewDataBinding>(@LayoutRes private val layout
         ThemeController.invalidate(this)
         super.onStart()
     }
-
 
     fun setupToolbar(toolbar: Toolbar) {
         _toolbar = toolbar

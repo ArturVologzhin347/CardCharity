@@ -5,7 +5,7 @@ import android.content.Context
 import com.example.cardcharity.presentation.activities.splash.SplashActivity
 import com.example.cardcharity.presentation.base.BaseViewModel
 import com.example.cardcharity.repository.preferences.Preferences
-import com.example.cardcharity.utils.openActivity
+import com.example.cardcharity.utils.extensions.openActivity
 
 class WelcomeViewModel(application: Application) : BaseViewModel(application) {
 

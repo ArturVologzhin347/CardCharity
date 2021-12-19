@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
 import androidx.fragment.app.FragmentManager
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Priority
@@ -16,44 +15,54 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.cardcharity.R
 import com.example.cardcharity.databinding.ActivityMainQrSheetBinding
-import com.example.cardcharity.domen.auth.Authentication
 import com.example.cardcharity.domen.glide.GlideApp
 import com.example.cardcharity.presentation.base.BaseBottomSheet
 import com.example.cardcharity.repository.model.Shop
 import com.example.cardcharity.repository.preferences.Preferences
-import com.example.cardcharity.utils.getBrightness
-import com.example.cardcharity.utils.setScreenBrightness
+import com.example.cardcharity.utils.*
+import com.example.cardcharity.utils.extensions.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class QrBottomSheet : BaseBottomSheet<ActivityMainQrSheetBinding>(R.layout.activity_main_qr_sheet) {
-    private var _shop: Shop? = null
     private var previousBrightness = 0F
 
-    private val shop: Shop
-        get() = _shop!!
+    private var _uid: String? = null
+    private var _shop: Shop? = null
 
-    fun display(fm: FragmentManager, shop: Shop) {
-        super.display(fm, TAG)
+    private val shop: Shop
+        get() = checkNotNull(_shop)
+
+    private val uid: String
+        get() = checkNotNull(_uid)
+
+    private val logoUrl: String
+        get() = shop.getLogoUrl()
+
+    private val codeUrl: String
+        get() = shop.getCodeUrl(uid)
+
+
+    fun display(fm: FragmentManager, uid: String, shop: Shop) {
+        this._uid = uid
         this._shop = shop
+        super.display(fm, TAG)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.apply {
-            if (_shop == null) {
-                dismiss()
-            }
-
-            loadLogo()
-            loadQr(shop.getCodeUrl(Authentication.uid))
+        if (_uid == null || _shop == null) {
+            dismiss()
+            return
         }
+
+        loadLogo()
+        loadQr(codeUrl)
     }
 
     private fun loadLogo() {
         GlideApp.with(this@QrBottomSheet)
             .asBitmap()
-            .load(shop.getLogoUrl())
+            .load(logoUrl)
             .circleCrop()
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
@@ -68,6 +77,16 @@ class QrBottomSheet : BaseBottomSheet<ActivityMainQrSheetBinding>(R.layout.activ
                                     GradientDrawable.Orientation.BOTTOM_TOP,
                                     intArrayOf(c1, Color.TRANSPARENT)
                                 )
+
+                                /*
+                                - слайды на весь экран
+                                - FAQ
+                                - app version
+                                - logo
+                                - цвета для тёмной темы
+                                - оформление для auth activity
+
+                                 */
 
                                 //TODO
                                 //binding.constraintLayout.background = background
@@ -109,10 +128,7 @@ class QrBottomSheet : BaseBottomSheet<ActivityMainQrSheetBinding>(R.layout.activ
 
         //TODO
         dialog?.let {
-            val bottomSheet =
-                it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
-            val behavior = BottomSheetBehavior.from(bottomSheet)
-
+            val behavior = it.behavior
             behavior.peekHeight = (COLLAPSED_HEIGHT * density).toInt()
             behavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
@@ -156,8 +172,8 @@ class QrBottomSheet : BaseBottomSheet<ActivityMainQrSheetBinding>(R.layout.activ
         private const val MAX_BRIGHTNESS = 1f
         private const val COLLAPSED_HEIGHT = 500
 
-        fun display(fm: FragmentManager, shop: Shop) {
-            QrBottomSheet().display(fm, shop)
+        fun display(fm: FragmentManager, uid: String, shop: Shop) {
+            QrBottomSheet().display(fm, uid, shop)
         }
     }
 }

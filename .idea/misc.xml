@@ -8,10 +8,13 @@
         <entry key="app/src/main/res/drawable/ic_night_mode_24.xml" value="0.21388888888888888" />
         <entry key="app/src/main/res/drawable/ic_wifi_off_24.xml" value="0.225" />
         <entry key="app/src/main/res/drawable/placeholer.xml" value="0.22407407407407406" />
+        <entry key="app/src/main/res/drawable/selectable_foreground.xml" value="0.25092592592592594" />
         <entry key="app/src/main/res/layout/activity_.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.13647830474268416" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.13647830474268416" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main_content.xml" value="0.13647830474268416" />
+        <entry key="app/src/main/res/layout/activity_main_drawer_header.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_main_list_item_shop.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_main_list_item_title.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main_qr_sheet.xml" value="0.25974189214088395" />
@@ -19,7 +22,9 @@
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.13647830474268416" />
+        <entry key="app/src/main/res/menu/main_drawer_navigation.xml" value="0.20925925925925926" />
         <entry key="app/src/main/res/menu/main_popup.xml" value="0.22314814814814815" />
+        <entry key="app/src/main/res/menu/main_toolbar.xml" value="0.17314814814814813" />
         <entry key="app/src/main/res/menu/toolbar_main.xml" value="0.22314814814814815" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.13647830474268416" />
       </map>

@@ -1,9 +1,11 @@
 package com.example.cardcharity.presentation.activities.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.cardcharity.R
 import com.example.cardcharity.databinding.ActivitySettingsBinding
@@ -84,5 +86,10 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
 
     companion object {
         private val handler = Handler(Looper.getMainLooper())
+
+        fun start(activity: AppCompatActivity) {
+            val i = Intent(activity, SettingsActivity::class.java)
+            activity.startActivity(i)
+        }
     }
 }

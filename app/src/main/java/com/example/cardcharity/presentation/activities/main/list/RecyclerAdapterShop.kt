@@ -6,16 +6,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cardcharity.R
-import com.example.cardcharity.domen.BindingInflater
-import com.example.cardcharity.presentation.activities.main.list.holder.ViewHolderShop
-import com.example.cardcharity.presentation.activities.main.list.holder.ViewHolderTitle
+import com.example.cardcharity.domen.binding.BindingInflater
+
 import com.example.cardcharity.presentation.base.BaseRecyclerAdapter
 import com.example.cardcharity.presentation.component.recyclerview.sticky.StickyHeaderDecoration
 
-class RecyclerAdapterShop :
+class RecyclerAdapterShop(private val uid: String) :
     BaseRecyclerAdapter<ModelShop, ViewHolderModelShop<*>>(),
-    StickyHeaderDecoration.StickyHeaderInterface<ModelShop, ViewHolderTitle> {
-    private var mModels = listOf<ModelShop>()
+    StickyHeaderDecoration.StickyHeaderInterface<ModelShop, ViewHolderModelShop.ViewHolderTitle> {
+    private var models = listOf<ModelShop>()
 
     override fun onCreateViewHolder(
         inflater: BindingInflater,
@@ -23,27 +22,27 @@ class RecyclerAdapterShop :
     ): ViewHolderModelShop<*> {
         return when (ModelType.values()[viewType]) {
             ModelType.MODEL ->
-                ViewHolderShop(inflater.binding(R.layout.activity_main_list_item_shop))
+                ViewHolderModelShop.ViewHolderShop(inflater.binding(R.layout.activity_main_list_item_shop))
 
             ModelType.TITLE ->
-                ViewHolderTitle(inflater.binding(R.layout.activity_main_list_item_title))
+                ViewHolderModelShop.ViewHolderTitle(inflater.binding(R.layout.activity_main_list_item_title))
         }
     }
 
     override fun onBindViewHolder(holder: ViewHolderModelShop<*>, position: Int, item: ModelShop) {
-        holder.bind(item)
+        holder.bind(item, uid)
     }
 
-
-    fun updateModels(newModels: List<ModelShop>) {
-        val diffUtilCallback = ShopDiffUtilCallback(mModels, newModels)
+    fun setModels(data: List<ModelShop>?) {
+        val models = data ?: emptyList()
+        val diffUtilCallback = ShopDiffUtilCallback(this.models, models)
         val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-        mModels = newModels
+        this.models = models
         diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemCount(): Int {
-        return mModels.size
+        return models.size
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -51,7 +50,7 @@ class RecyclerAdapterShop :
     }
 
     override fun getItem(position: Int): ModelShop {
-        return mModels[position]
+        return models[position]
     }
 
     override fun getHeaderPositionForItem(itemPosition: Int): Int {
@@ -84,8 +83,8 @@ class RecyclerAdapterShop :
         context: Context,
         parent: RecyclerView,
         viewType: Int
-    ): ViewHolderTitle {
-        return ViewHolderTitle(
+    ): ViewHolderModelShop.ViewHolderTitle {
+        return ViewHolderModelShop.ViewHolderTitle(
             DataBindingUtil.inflate(
                 LayoutInflater.from(context),
                 R.layout.activity_main_list_item_title,
@@ -95,7 +94,7 @@ class RecyclerAdapterShop :
         )
     }
 
-    override fun bindHeader(header: ViewHolderTitle, headerPosition: Int) {
-        header.bind(getItem(headerPosition))
+    override fun bindHeader(header: ViewHolderModelShop.ViewHolderTitle, headerPosition: Int) {
+        header.bind(getItem(headerPosition), uid)
     }
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="?colorSurface"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageViewAvatar"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="22dp"
+            tools:ignore="ContentDescription" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageViewAvatar"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="22dp"
+            android:includeFontPadding="false"
+            android:textColor="?colorOnSurface"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="Artur Vologzhin" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewUsername"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="22dp"
+            android:layout_toStartOf="@id/imageViewArrow"
+            android:alpha="0.72"
+            android:textColor="?colorOnSurface"
+            tools:text="username@gmail.com" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewArrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@id/textViewEmail"
+            android:layout_alignBottom="@id/textViewEmail"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="22dp"
+            android:alpha="0.72"
+            android:src="@drawable/ic_arrow_drop_down_24"
+            app:tint="?colorOnSurface"
+            tools:ignore="ContentDescription" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/textViewEmail"
+            android:background="?android:attr/listDivider" />
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

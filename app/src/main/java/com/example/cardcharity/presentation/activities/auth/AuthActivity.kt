@@ -1,7 +1,6 @@
 package com.example.cardcharity.presentation.activities.auth
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -10,7 +9,7 @@ import com.example.cardcharity.databinding.ActivityAuthBinding
 import com.example.cardcharity.domen.auth.Authentication
 import com.example.cardcharity.presentation.activities.main.MainActivity
 import com.example.cardcharity.presentation.base.BaseActivity
-import com.example.cardcharity.utils.openActivity
+import com.example.cardcharity.utils.extensions.openActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
@@ -29,19 +28,22 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(R.layout.activity_auth) {
                 Authentication.firebaseAuthWithGoogle(
                     account.idToken!!,
                     object : Authentication.LoginCallback {
-                        override fun onLogin() {
-                            openActivity(this@AuthActivity, MainActivity::class)
-                        }
-
-                        override fun onFailure(e: Exception) {
-                            failureLogin(e)
+                        override fun onComplete(isAuthorized: Boolean) {
+                            if (isAuthorized) {
+                                openActivity(this@AuthActivity, MainActivity::class)
+                                finish()
+                            } else {
+                                failureLogin()
+                            }
                         }
                     })
             } catch (e: ApiException) {
-                failureLogin(e)
+                failureLogin()
+                Timber.w(e)
             }
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +59,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(R.layout.activity_auth) {
         googleLauncher.launch(intent)
     }
 
-    private fun failureLogin(e: Exception) {
-        Timber.w("Google sign is failed", e)
+    private fun failureLogin() {
         Snackbar.make(binding.root, "Google sign is failed", Snackbar.LENGTH_LONG).show()
     }
 }

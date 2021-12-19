@@ -24,8 +24,8 @@ class ShopDiffUtilCallback(
         }
 
         return when (oldItem.type) {
-            ModelType.MODEL -> oldItem.shop!!.id == newItem.shop!!.id
-            ModelType.TITLE -> oldItem.title == newItem.title
+            ModelType.MODEL -> oldItem.getShop().id == newItem.getShop().id
+            ModelType.TITLE -> oldItem.geTitle() == newItem.geTitle()
         }
     }
 
@@ -39,12 +39,12 @@ class ShopDiffUtilCallback(
 
         return when (oldItem.type) {
             ModelType.MODEL -> {
-                val oldShop = oldItem.shop!!
-                val newShop = newItem.shop!!
+                val oldShop = oldItem.getShop()
+                val newShop = newItem.getShop()
                 oldShop.id == newShop.id && oldShop.name == newShop.name
             }
 
-            ModelType.TITLE -> oldItem.title == newItem.title
+            ModelType.TITLE -> oldItem.geTitle() == newItem.geTitle()
         }
     }
 }

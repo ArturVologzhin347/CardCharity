@@ -2,13 +2,13 @@ package com.example.cardcharity.presentation.base
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cardcharity.domen.BindingInflater
+import com.example.cardcharity.domen.binding.BindingInflater
 
 abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
     private var _bindingInflater: BindingInflater? = null
 
-    protected val bindingInflater
-        get() = _bindingInflater!!
+    private val bindingInflater
+        get() = checkNotNull(_bindingInflater)
 
     abstract fun getItem(position: Int): T
 
