@@ -1,48 +1,61 @@
 <resources>
-    <string name="web_client_id"> 915924360160-k3kj8bsij41ei8unc9glqjarrs841ete.apps.googleusercontent.com</string>
+    <string name="web_client_id">915924360160-k3kj8bsij41ei8unc9glqjarrs841ete.apps.googleusercontent.com</string>
     <string name="app_name">Card Charity</string>
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="lorem_ipsum">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="or">Or</string>
 
 
-    <string name="time_morning">Доброе утро</string>
-    <string name="time_afternoon">Хорошего дня</string>
-    <string name="time_evening">Добрый вечер</string>
-    <string name="time_night">Доброй ночи</string>
-    <string name="time_default">Привет</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="to">to</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="log_in">Log In</string>
+    <string name="login">Login</string>
+    <string name="login_google">Login with Google</string>
+    <string name="do_not_have_any_account">Don\'t have an account?</string>
+    <string name="signup">Signup</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_account">Create account</string>
+
+    <string name="email">Email</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="password_confirm">Confirm your password</string>
+    <string name="password_help">Your password must be at least 6 characters.</string>
 
 
-    <string name="settings">Настройки</string>
-    <string name="about_app">О приложении</string>
-
-    <string name="more">Ещё</string>
-    <string name="next">Продолжить</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Назад</string>
-    <string name="sure">Уверены?</string>
-    <string name="select_shop">Выберите магазин:</string>
-
-    <string name="shop_barcode">Покажите штрих-код кассиру</string>
 
 
-    <string name="login_with_google">Войти через Google</string>
 
 
-    <string name="welcome_to_card_charity">Добро пожаловать в Card Charity!</string>
 
 
-    <string name="appearance">Внешний вид</string>
-    <string name="night_mode">Ночная тема</string>
-    <string name="night_mode_auto">Синхронизация с темой Android</string>
-    <string name="night_mode_auto_subtitle">Только для версий Q или выше</string>
-    <string name="brightness_barcode">Подсвечивать штрих-код</string>
-    <string name="account">Профиль</string>
-
-    <string name="sign_out">Выйти</string>
-    <string name="logout">Выйти из аккаунта</string>
-    <string name="refresh">Обновить</string>
-    <string name="internet_connection_error">Нет подключения к Интернету</string>
-    <string name="error">Упс! Произошла неизвестная ошибка</string>
+    <string name="highlight_qr_code">Highlight QR code</string>
+    <string name="about_app">About app</string>
 
 
+
+    <string name="time_morning">Good morning</string>
+    <string name="time_afternoon">Good day</string>
+    <string name="time_evening">Good afternoon</string>
+    <string name="time_night">Good night</string>
+    <string name="time_default">Hi</string>
+
+
+    <string name="error_unknown">Unknown error</string>
+    <string name="error_no_network">No Network Connection</string>
+    <string name="error_email_invalid">Invalid email address.</string>>
+    <string name="error_email_empty">Email address cannot be empty.</string>
+    <string name="error_password_empty">Password cannot be empty.</string>
+    <string name="error_no_network_helper">No connection to the network, try again later</string>
+    <string name="error_wrong_password">Wrong password, please try again.</string>
+    <string name="error_user_does_not_exist">User with this email does not exist.</string>
+    <string name="error_user_already_exists">User already exists.</string>
+    <string name="error_password_mismatch">Password mismatch.</string>
+
+
+
+
+
+    <string name="login_google_failed">Google login is failed.</string>
 </resources>

@@ -3,6 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 
     dependencies {
@@ -12,4 +13,5 @@ buildscript {
             classpath(googleServices)
         }
     }
+
 }

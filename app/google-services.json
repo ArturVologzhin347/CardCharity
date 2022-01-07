@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "915924360160-fknuu7kue7sccbbgd34dda0chsq0v7n7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cardcharity",
+            "certificate_hash": "bef048ee82d74614be99cf71dda13efc93109244"
+          }
+        },
+        {
+          "client_id": "915924360160-gigfkd0nrf02tdcar02hflb6p6skrkfs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cardcharity",
+            "certificate_hash": "0a68441602dbd52ae415433f22f444dcc6a47f81"
+          }
+        },
+        {
           "client_id": "915924360160-k3kj8bsij41ei8unc9glqjarrs841ete.apps.googleusercontent.com",
           "client_type": 3
         }

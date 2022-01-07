@@ -6,4 +6,5 @@ pluginManagement {
     }
 }
 rootProject.name = "Card Charity"
+
 include(":app")

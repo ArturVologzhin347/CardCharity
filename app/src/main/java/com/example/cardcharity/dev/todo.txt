@@ -1,41 +1,6 @@
-- перенести всё на kts
-- перенести всё на compose material 2
-- переписать network service
-- DI
-- нормальные модальные классы
-- moshi
+- lorem ipsum in signup screen
+- divider in login activity. set normal size
+- google button design
 
 
 
-
-
-
-
-
-
-
-
-
-- обучалка при старте, показывающая шо делать
-- favorite shops
-
-
-
-
-
-- выбрать анимацию для дровера
-
-
-- dividers
-- settings activity + profile activity
-- themes
-- icon
-- welcome activity
-- auth activity
-- splash activity
-- Hello, User!
-
-
-Code refactor:
-- add DI
-- recode repository, api's

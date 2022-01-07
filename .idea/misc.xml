@@ -4,8 +4,27 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/compose-model-1639895850188.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1640015170479.xml" value="0.2101851851851852" />
+        <entry key="../../../../layout/compose-model-1640017381667.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1640105189293.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1641386077204.xml" value="0.27280405405405406" />
+        <entry key="../../../../layout/compose-model-1641415141743.xml" value="0.27675153262768876" />
+        <entry key="../../../../layout/compose-model-1641419317490.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1641420049934.xml" value="0.33555796567325513" />
+        <entry key="../../../../layout/compose-model-1641485494930.xml" value="0.27280405405405406" />
+        <entry key="../../../../layout/compose-model-1641485886216.xml" value="0.31658903085626705" />
+        <entry key="../../../../layout/compose-model-1641489055431.xml" value="0.27280405405405406" />
+        <entry key="../../../../layout/compose-model-1641492378493.xml" value="0.2351851851851852" />
+        <entry key="../../../../layout/compose-model-1641496418637.xml" value="0.23148148148148148" />
+        <entry key="../../../../layout/compose-model-1641499524848.xml" value="0.23148148148148148" />
+        <entry key="../../../../layout/compose-model-1641500601706.xml" value="0.2554461202070205" />
+        <entry key="../../../../layout/compose-model-1641501774231.xml" value="0.23148148148148148" />
+        <entry key="../../../../layout/compose-model-1641554607271.xml" value="0.23148148148148148" />
+        <entry key="../../../../layout/compose-model-1641560866948.xml" value="0.17584479381609025" />
         <entry key="../../../../layout/custom_preview.xml" value="10.0" />
-        <entry key="app/src/main/res/drawable/ic_google_24.xml" value="0.22314814814814815" />
+        <entry key="app/src/main/res/drawable/ic_.xml" value="0.2351851851851852" />
+        <entry key="app/src/main/res/drawable/ic_done_24.xml" value="0.2351851851851852" />
+        <entry key="app/src/main/res/drawable/ic_google_24.xml" value="0.4714650940058848" />
         <entry key="app/src/main/res/drawable/ic_night_mode_24.xml" value="0.21388888888888888" />
         <entry key="app/src/main/res/drawable/ic_wifi_off_24.xml" value="0.225" />
         <entry key="app/src/main/res/drawable/placeholer.xml" value="0.22407407407407406" />
@@ -36,7 +55,7 @@
       <item index="0" class="java.lang.String" itemvalue="com.bumptech.glide.annotation.GlideModule" />
     </list>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

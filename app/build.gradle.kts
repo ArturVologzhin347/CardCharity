@@ -1,15 +1,20 @@
 plugins {
-    id("com.android.application")
-    id("com.google.gms.google-services")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("com.android.application")
+    id("com.google.gms.google-services")
+
 }
 
 allprojects {
     repositories {
         mavenCentral()
         google()
+        maven("https://maven.google.com")
+        gradlePluginPortal()
     }
+
+
 }
 
 android {
@@ -29,6 +34,7 @@ android {
         }
     }
 
+
     buildFeatures {
         compose = true
     }
@@ -37,6 +43,11 @@ android {
         kotlinCompilerExtensionVersion = Dependencies.Compose.compose_version
 
     }
+
+
+//    kapt {
+//        correctErrorTypes = true
+//    }
 
     packagingOptions {
         resources {
@@ -74,16 +85,38 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = "1.8"
+            kotlinOptions.freeCompilerArgs += listOf(
+                "-Xopt-in=kotlin.RequiresOptIn"
+            )
+
+        }
     }
+
 }
+
+
 
 dependencies {
 
+    with(Dependencies.Coil) {
+        implementation(coil)
+    }
+
+    //Accompanist
+    with(Dependencies.Accompanist) {
+        implementation(insets)
+        implementation(systemuicontroller)
+    }
+
+    //Firebase
     with(Dependencies.Firebase) {
         implementation(platform(bom))
         implementation(auth)
+        implementation(authServices)
     }
 
     //Retrofit
@@ -97,6 +130,7 @@ dependencies {
     with(Dependencies.Moshi) {
         implementation(moshi)
         kapt(codegen)
+
     }
 
     //Dagger 2

@@ -1,8 +1,13 @@
 object Dependencies {
 
+    object Coil {
+        const val coil = "io.coil-kt:coil-compose:1.4.0"
+    }
+
     object Firebase {
-        const val bom = "com.google.firebase:firebase-bom:29.0.0"
+        const val bom = "com.google.firebase:firebase-bom:29.0.3"
         const val auth = "com.google.firebase:firebase-auth-ktx"
+        const val authServices = "com.google.android.gms:play-services-auth:20.0.1"
     }
 
     object Kotlin {
@@ -27,6 +32,10 @@ object Dependencies {
         const val activity = "androidx.activity:activity-compose:1.3.0-alpha06"
     }
 
+    object Accompanist {
+        const val insets = "com.google.accompanist:accompanist-insets-ui:0.21.5-rc"
+        const val systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.18.0"
+    }
 
     object Material {
         const val material_version = "1.4.0"
