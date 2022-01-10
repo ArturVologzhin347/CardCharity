@@ -28,9 +28,6 @@ import com.example.cardcharity.presentation.activities.auth.login.LoginViewState
 import com.example.cardcharity.presentation.theme.PreviewTheme
 import com.example.cardcharity.presentation.ui.elements.*
 
-private val LOCALE_EMAIL = SignupViewState.Fail.Locale.EMAIL
-private val LOCALE_PASSWORD = SignupViewState.Fail.Locale.PASSWORD
-private val LOCALE_CONFIRM = SignupViewState.Fail.Locale.CONFIRM
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -55,7 +52,7 @@ fun SignupScreen(
         val focusManager = LocalFocusManager.current
 
         Column {
-            BackButton(onClick = { reduce(SignupEvent.back()) })
+            BackButton(onClick = { reduce(back()) })
 
             NestedResizeColumn {
                 SignupLabel()
@@ -63,8 +60,8 @@ fun SignupScreen(
                 EmailTextField(
                     email = email,
                     onEmailChange = { email = it },
-                    isError = viewState.failOrNot(LOCALE_EMAIL),
-                    helperText = viewState.failMessageOrEmpty(LOCALE_EMAIL),
+                    isError = viewState.failOrNot(Fail.Locale.EMAIL),
+                    helperText = viewState.failMessageOrEmpty(Fail.Locale.EMAIL),
                     focusManager = focusManager
                 )
 
@@ -73,9 +70,9 @@ fun SignupScreen(
                 PasswordTextField(
                     password = password,
                     onPasswordChange = { password = it },
-                    helperText = viewState.failMessageOrNull(LOCALE_PASSWORD)
+                    helperText = viewState.failMessageOrNull(Fail.Locale.PASSWORD)
                         ?: stringResource(R.string.password_help),
-                    isError = viewState.failOrNot(LOCALE_PASSWORD),
+                    isError = viewState.failOrNot(Fail.Locale.PASSWORD),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,
                         imeAction = ImeAction.Next
@@ -91,7 +88,7 @@ fun SignupScreen(
                 VerticalSpace(24.dp)
 
 
-                val isConfirmError = viewState.failOrNot(LOCALE_CONFIRM)
+                val isConfirmError = viewState.failOrNot(Fail.Locale.CONFIRM)
                 LaunchedEffect(isConfirmError) {
                     if (isConfirmError) {
                         confirm = ""
@@ -102,7 +99,7 @@ fun SignupScreen(
                     password = confirm,
                     onPasswordChange = { confirm = it },
                     isError = isConfirmError,
-                    helperText = viewState.failMessageOrEmpty(LOCALE_CONFIRM),
+                    helperText = viewState.failMessageOrEmpty(Fail.Locale.CONFIRM),
                     keyboardActions = KeyboardActions(
                         onDone = {
                             keyboardController?.hide()
@@ -115,7 +112,7 @@ fun SignupScreen(
                     viewState = viewState,
                     onClick = {
                         reduce(
-                            SignupEvent.signup(
+                            signup(
                                 email = email,
                                 password = password,
                                 confirm = confirm
@@ -155,13 +152,13 @@ fun SignupButton(
             .fillMaxWidth()
     ) {
         when (viewState) {
-            SignupViewState.Load -> {
+            Load -> {
                 CircularProgressIndicator(
                     color = MaterialTheme.colors.onPrimary
                 )
             }
 
-            is SignupViewState.Success -> {
+            Success -> {
                 Icon(
                     painter = painterResource(R.drawable.ic_done_all_24),
                     tint = MaterialTheme.colors.onPrimary,
@@ -201,7 +198,7 @@ fun SignupScreenPreview() {
     PreviewTheme {
         SignupScreen(
             reduce = {},
-            viewState = SignupViewState.default()
+            viewState = default()
         )
     }
 }

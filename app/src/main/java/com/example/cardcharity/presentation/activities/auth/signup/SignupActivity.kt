@@ -27,8 +27,8 @@ class SignupActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel.viewState.onEach { state ->
-            if (state is SignupViewState.Success) {
-                reduceEvent(SignupEvent.go())
+            if (state is Success) {
+                reduceEvent(go())
             }
         }.launchWhenStarted(lifecycleScope)
     }
@@ -46,14 +46,14 @@ class SignupActivity : BaseActivity() {
     private fun reduceEvent(event: SignupEvent) {
         Timber.d("Reducing event: $event")
 
-        if (viewModel.state == SignupViewState.Load) {
+        if (viewModel.state == Load) {
             Timber.i("Cannot reduce event $event because state is Load")
             return
         }
 
         when (event) {
-            SignupEvent.Back -> finish()
-            SignupEvent.Go -> goEvent()
+            Back -> finish()
+            Go -> goEvent()
             else -> viewModel.reduceEvent(event)
         }
     }

@@ -17,7 +17,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class SignupViewModel(application: Application) : BaseViewModel(application) {
-    private val _viewState = MutableStateFlow<SignupViewState>(SignupViewState.default())
+    private val _viewState = MutableStateFlow<SignupViewState>(default())
     val viewState = _viewState.asStateFlow()
 
     var state: SignupViewState
@@ -29,13 +29,13 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
 
     fun reduceEvent(event: SignupEvent) {
         when (event) {
-            is SignupEvent.Signup -> signupEvent(event)
+            is Signup -> signupEvent(event)
             else -> throw NotImplementedError("Event $event is not implemented in $TAG")
         }
     }
 
-    private fun signupEvent(event: SignupEvent.Signup) = viewModelScope.launch {
-        state = SignupViewState.load()
+    private fun signupEvent(event: Signup) = viewModelScope.launch {
+        state = load()
 
         try {
             with(event) {
@@ -45,7 +45,7 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
 
                 when (val authEvent = authorization.createUser(email, password)) {
                     is Event.Fail -> state = handleFirebaseErrors(authEvent.throwable)
-                    is Event.Success -> state = SignupViewState.success()
+                    is Event.Success -> state = success()
                     Event.Load -> {} /* Ignore */
                 }
             }
@@ -53,7 +53,7 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
         } catch (handled: SignupFailHandled) {
             state = handled.fail
         } catch (e: Exception) {
-            state = SignupViewState.failUnknown()
+            state = failUnknown()
             Timber.w(e)
         }
     }
@@ -62,7 +62,7 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
     private fun validateEmail(email: String) {
         when {
             email.trimmedIsEmpty() || email.isNotEmail() ->
-                throw SignupViewState.failInvalidEmail().handled()
+                throw failInvalidEmail().handled()
         }
     }
 
@@ -70,7 +70,7 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
     private fun validatePassword(password: String) {
         when {
             password.trim().length < MIN_PASSWORD_LENGTH ->
-                throw SignupViewState.failInvalidPassword().handled()
+                throw failInvalidPassword().handled()
         }
     }
 
@@ -78,27 +78,27 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
     private fun validateConfirm(password: String, confirm: String) {
         when {
             password != confirm ->
-                throw SignupViewState.failPasswordMismatch().handled()
+                throw failPasswordMismatch().handled()
         }
     }
 
-    private fun handleFirebaseErrors(throwable: Throwable): SignupViewState.Fail {
+    private fun handleFirebaseErrors(throwable: Throwable): Fail {
         return when (throwable) {
-            is FirebaseNetworkException -> SignupViewState.failNoNetworkConnection()
+            is FirebaseNetworkException -> failNoNetworkConnection()
             is FirebaseAuthException -> when (throwable.errorCode) {
 
                 "ERROR_INVALID_EMAIL" ->
-                    SignupViewState.failInvalidEmail()
+                    failInvalidEmail()
 
                 "ERROR_EMAIL_ALREADY_IN_USE", "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" ->
-                    SignupViewState.failUserAlreadyExists()
+                    failUserAlreadyExists()
 
                 "ERROR_WEAK_PASSWORD" ->
-                    SignupViewState.failInvalidPassword()
+                    failInvalidPassword()
 
-                else -> SignupViewState.failUnknown()
+                else -> failUnknown()
             }
-            else -> SignupViewState.failUnknown()
+            else -> failUnknown()
         }
     }
 
