@@ -18,7 +18,6 @@ import com.example.cardcharity.utils.extensions.launchWhenStarted
 import com.example.cardcharity.utils.extensions.openActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.common.api.ApiException
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
@@ -33,8 +32,8 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel.viewState.onEach { state ->
-            if(state is LoginViewState.Success) {
-              reduceEvent(LoginEvent.go())
+            if (state is Success) {
+                reduceEvent(go())
             }
         }.launchWhenStarted(lifecycleScope)
     }
@@ -52,16 +51,16 @@ class LoginActivity : BaseActivity() {
     private fun reduceEvent(event: LoginEvent) {
         Timber.d("Reducing event: $event")
 
-        if (viewModel.state == LoginViewState.Load) {
+        if (viewModel.state == Load) {
             Timber.i("Cannot reduce event $event because state is Load")
             return
         }
 
         when (event) {
-            is LoginEvent.ForgotPassword -> forgotPasswordEvent(event.email)
-            LoginEvent.LoginWithGoogle -> loginWithGoogleEvent()
-            LoginEvent.Signup -> signup()
-            LoginEvent.Go -> go()
+            is ForgotPassword -> forgotPasswordEvent(event.email)
+            LoginWithGoogle -> loginWithGoogleEvent()
+            Signup -> signup()
+            Go -> goEvent()
             else -> viewModel.reduceEvent(event)
         }
     }
@@ -79,7 +78,7 @@ class LoginActivity : BaseActivity() {
         openActivity(this, SignupActivity::class)
     }
 
-    private fun go() {
+    private fun goEvent() {
         handler.postDelayed(DELAY_AFTER_GO) {
             Intent(this, MainActivity::class.java).apply {
                 startActivity(this)

@@ -2,22 +2,24 @@ package com.example.cardcharity.presentation.activities.auth.login
 
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.*
-import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -30,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.example.cardcharity.R
 import com.example.cardcharity.presentation.theme.PreviewTheme
 import com.example.cardcharity.presentation.ui.elements.*
-import timber.log.Timber
 
 
 /*
@@ -38,9 +39,6 @@ import timber.log.Timber
 - google button
  */
 
-val LOCALE_EMAIL = LoginViewState.Fail.Locale.EMAIL
-val LOCALE_PASSWORD = LoginViewState.Fail.Locale.PASSWORD
-val LOCALE_COMMON = LoginViewState.Fail.Locale.COMMON
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -70,8 +68,8 @@ fun LoginScreen(
             EmailTextField(
                 email = email,
                 onEmailChange = { email = it },
-                isError = viewState.failOrNot(LOCALE_EMAIL),
-                helperText = viewState.failMessageOrEmpty(LOCALE_EMAIL),
+                isError = viewState.failOrNot(Fail.Locale.EMAIL),
+                helperText = viewState.failMessageOrEmpty(Fail.Locale.EMAIL),
                 focusManager = focusManager
             )
 
@@ -80,8 +78,8 @@ fun LoginScreen(
             PasswordTextField(
                 password = password,
                 onPasswordChange = { password = it },
-                isError = viewState.failOrNot(LOCALE_PASSWORD),
-                helperText = viewState.failMessageOrEmpty(LOCALE_PASSWORD),
+                isError = viewState.failOrNot(Fail.Locale.PASSWORD),
+                helperText = viewState.failMessageOrEmpty(Fail.Locale.PASSWORD),
                 keyboardActions = KeyboardActions(
                     onDone = {
                         keyboardController?.hide()
@@ -96,7 +94,7 @@ fun LoginScreen(
                     .fillMaxWidth()
             ) {
                 ForgotPasswordButton(
-                    onClick = { reduce(LoginEvent.forgotPassword(email)) },
+                    onClick = { reduce(forgotPassword(email)) },
                     modifier = Modifier
                         .padding(end = 16.dp)
                         .align(Alignment.CenterEnd)
@@ -106,9 +104,10 @@ fun LoginScreen(
             VerticalSpace(56.dp)
             LoginButton(
                 state = viewState,
+                keyboardController = keyboardController,
                 onClick = {
                     reduce(
-                        LoginEvent.loginWithEmailAndPassword(
+                        loginWithEmailAndPassword(
                             email = email,
                             password = password
                         )
@@ -117,7 +116,7 @@ fun LoginScreen(
             )
 
             SignupButton(
-                onClick = { reduce(LoginEvent.signup()) }
+                onClick = { reduce(signup()) }
             )
 
             Divider(modifier = Modifier.padding(horizontal = 128.dp))
@@ -125,7 +124,7 @@ fun LoginScreen(
             VerticalSpace(56.dp)
 
             GoogleButton(
-                onClick = { reduce(LoginEvent.loginWithGoogle()) }
+                onClick = { reduce(loginWithGoogle()) }
             )
         }
     }
@@ -219,14 +218,17 @@ fun GoogleButton(onClick: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginButton(
     onClick: () -> Unit,
-    state: LoginViewState
+    state: LoginViewState,
+    keyboardController: SoftwareKeyboardController?
 ) {
     AppButton(
         onClick = {
-            if (state != LoginViewState.Load && state !is LoginViewState.Success) {
+            if (state != Load && state !is Success) {
+                keyboardController?.hide()
                 onClick()
             }
         },
@@ -236,13 +238,13 @@ fun LoginButton(
             .fillMaxWidth()
     ) {
         when (state) {
-            LoginViewState.Load -> {
+            Load -> {
                 CircularProgressIndicator(
                     color = MaterialTheme.colors.onPrimary
                 )
             }
 
-            is LoginViewState.Success -> {
+            Success -> {
                 Icon(
                     painter = painterResource(R.drawable.ic_done_24),
                     tint = MaterialTheme.colors.onPrimary,
@@ -305,7 +307,7 @@ fun LoginScreenPreview() {
     PreviewTheme {
         LoginScreen(
             reduce = {},
-            LoginViewState.default()
+            viewState = default()
         )
     }
 }

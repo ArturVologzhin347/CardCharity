@@ -36,13 +36,18 @@
             android:name=".presentation.activities.auth.signup.SignupActivity"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name=".presentation.activities.password.forgot.ForgotActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".presentation.activities.password.reset.ResetPasswordActivity"
+            android:windowSoftInputMode="adjustResize" />
+
 
         <activity android:name=".presentation.activities.main.MainActivity" />
-
-
         <activity android:name=".presentation.activities.welcome.WelcomeActivity" />
-        <activity android:name=".presentation.activities.password.forgot.ForgotActivity" />
-
+        <activity android:name=".presentation.activities.settings.SettingsActivity" />
+        <activity android:name=".presentation.activities.about.AboutActivity" />
     </application>
-
 </manifest>

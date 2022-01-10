@@ -4,6 +4,8 @@ import com.example.cardcharity.App
 import com.example.cardcharity.di.module.*
 import com.example.cardcharity.presentation.activities.auth.login.LoginViewModel
 import com.example.cardcharity.presentation.activities.auth.signup.SignupViewModel
+import com.example.cardcharity.presentation.activities.main.MainViewModel
+import com.example.cardcharity.presentation.activities.settings.SettingsViewModel
 import com.example.cardcharity.presentation.activities.splash.SplashViewModel
 import com.example.cardcharity.presentation.base.BaseActivity
 import dagger.Component
@@ -25,6 +27,5 @@ interface RepositoryComponent {
     fun inject(app: App)
     fun inject(activity: BaseActivity)
     fun inject(vm: SplashViewModel)
-    fun inject(vm: LoginViewModel)
-    fun inject(vm: SignupViewModel)
+    fun inject(vm: SettingsViewModel)
 }

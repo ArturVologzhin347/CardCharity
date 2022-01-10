@@ -16,7 +16,7 @@ abstract class PreferencesPrimaryStore(
         edit { it.putBoolean(key, value) }
     }
 
-    fun setString(key: String, value: String) {
+    fun setString(key: String, value: String?) {
         edit { it.putString(key, value) }
     }
 
@@ -60,8 +60,8 @@ abstract class PreferencesPrimaryStore(
         return preferences.getFloat(key, defaultValue)
     }
 
-    fun getStringSet(key: String, defaultValue: Set<String> = setOf()): Set<String> {
-        return preferences.getStringSet(key, defaultValue) ?: setOf()
+    fun getStringSet(key: String, defaultValue: Set<String> = emptySet()): Set<String> {
+        return preferences.getStringSet(key, defaultValue) ?: emptySet()
     }
 
     open fun set(key: String, value: Any) {

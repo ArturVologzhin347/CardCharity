@@ -37,40 +37,35 @@ fun OkHttpClient.Builder.toUnsafe() {
     sslContext.init(null, arrayOf(trustManager), SecureRandom())
     val sslSocketFactory: SSLSocketFactory = sslContext.socketFactory
     hostnameVerifier(NullHostNameVerifier())
-    sslSocketFactory(sslSocketFactory, trustManager as X509TrustManager)
+    sslSocketFactory(sslSocketFactory, trustManager)
 }
 
+
 @SuppressLint("TrustAllX509TrustManager")
-fun getTrustAllCertsManager(): TrustManager {
-    @SuppressLint("CustomX509TrustManager")
-    val manager = object : X509TrustManager {
+fun getTrustAllCertsManager() =
+    @SuppressLint("CustomX509TrustManager") object : X509TrustManager {
         override fun checkClientTrusted(chain: Array<X509Certificate?>?, authType: String?) {}
         override fun checkServerTrusted(chain: Array<X509Certificate?>?, authType: String?) {}
         override fun getAcceptedIssuers(): Array<X509Certificate?> {
-            return arrayOf()
+            return emptyArray()
         }
     }
 
-    return manager
-}
 
 fun OkHttpClient.Builder.setupResponsesCache(context: Context, size: Long) {
     val httpCacheDirectory = File(context.cacheDir, "responses")
-    this.cache(Cache(httpCacheDirectory, size))
+    cache(Cache(httpCacheDirectory, size))
 }
-
 
 @Suppress("BlockingMethodInNonBlockingContext")
 suspend fun <T> Response<T>.errorSuspending(): String = withContext(Dispatchers.IO) {
     return@withContext checkNotNull(this@errorSuspending.errorBody()?.string())
 }
 
-fun HttpLoggingInterceptor.setDebugMode(isDebug: Boolean): HttpLoggingInterceptor {
-    return this.apply {
-        level = if (isDebug) {
-            HttpLoggingInterceptor.Level.BODY
-        } else {
-            HttpLoggingInterceptor.Level.NONE
-        }
-    }
-}
+
+fun HttpLoggingInterceptor.setDebugMode(isDebug: Boolean): HttpLoggingInterceptor =
+    this.apply { level = if (isDebug) LOG_HTTP_BODY else LOG_HTTP_NONE }
+
+
+private val LOG_HTTP_BODY = HttpLoggingInterceptor.Level.BODY
+private val LOG_HTTP_NONE = HttpLoggingInterceptor.Level.NONE

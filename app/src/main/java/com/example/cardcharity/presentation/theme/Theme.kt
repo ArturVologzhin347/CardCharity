@@ -6,16 +6,19 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import coil.ImageLoader
 import coil.compose.LocalImageLoader
 import com.example.cardcharity.utils.extensions.okHttpClient
-
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val LightThemeColors = lightColors(
     primary = light_primary,
     onPrimary = light_onPrimary,
     secondary = light_secondary,
+    secondaryVariant = light_primary,
     onSecondary = light_onSecondary,
     error = light_error,
     onError = light_onError,
@@ -29,6 +32,7 @@ private val DarkThemeColors = darkColors(
     primary = dark_primary,
     onPrimary = dark_onPrimary,
     secondary = dark_secondary,
+    secondaryVariant = light_primary,
     onSecondary = dark_onSecondary,
     error = dark_error,
     onError = dark_onError,
@@ -39,34 +43,34 @@ private val DarkThemeColors = darkColors(
 )
 
 
-
-
-
-
-
-
-
-
 @Composable
 fun CardCharityTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    val systemUiController = rememberSystemUiController()
     val context = LocalContext.current
+
     val colors = if (darkTheme) {
         DarkThemeColors
     } else {
         LightThemeColors
     }
 
+    SideEffect {
+        with(systemUiController) {
+            setStatusBarColor(color = colors.background)
+            setNavigationBarColor(color = colors.surface)
+        }
+    }
+
+
     val imageLoader = ImageLoader
         .Builder(context)
         .okHttpClient(context.okHttpClient)
         .build()
 
-    CompositionLocalProvider(
-        LocalImageLoader provides imageLoader
-    ) {
+    CompositionLocalProvider(LocalImageLoader provides imageLoader) {
         MaterialTheme(
             colors = colors,
             typography = AppTypography,

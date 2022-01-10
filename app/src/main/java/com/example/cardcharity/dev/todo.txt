@@ -1,3 +1,23 @@
+- снести всё нахуй из reset password, сделать из него forgot password и забить ХУЙ
+
+
+- rename back event to finish
+- refactor sealed classes
+- переписать базовый класс вью модели и активити, адаптировав их под работу с ивентами
+- move focus to error locale (text fields)
+
+- greetings in splash activity
+
+
+- Search activity (нахождение по принципу search in name)
+- last shops
+
+
+
+
+
+
+
 - lorem ipsum in signup screen
 - divider in login activity. set normal size
 - google button design

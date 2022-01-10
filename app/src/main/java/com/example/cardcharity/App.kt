@@ -3,12 +3,11 @@ package com.example.cardcharity
 import android.app.Application
 import android.content.Context
 import com.example.cardcharity.di.Dagger2
-import com.example.cardcharity.presentation.theme.DarkThemeManager
+import com.example.cardcharity.domain.auth.Authorization
 import com.example.cardcharity.repository.network.Api
 import com.example.cardcharity.repository.preferences.Preferences
 import okhttp3.OkHttpClient
 import timber.log.Timber
-
 import javax.inject.Inject
 
 class App : Application() {
@@ -19,6 +18,9 @@ class App : Application() {
 
     @Inject
     lateinit var api: Api
+
+    @Inject
+    lateinit var authorization: Authorization
 
     @Inject
     lateinit var okHttpClient: OkHttpClient

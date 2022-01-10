@@ -13,6 +13,7 @@
         <item name="colorSurface">@color/dark_surface</item>
         <item name="colorOnSurface">@color/dark_onSurface</item>
 
+
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
@@ -28,14 +29,4 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="AppTheme.Crop" parent="AppTheme">
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="AppTheme.Modal" parent="AppTheme">
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
 </resources>

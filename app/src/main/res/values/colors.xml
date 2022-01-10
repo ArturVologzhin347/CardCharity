@@ -11,10 +11,11 @@
     <color name="light_onSecondary">#FFFFFF</color>
     <color name="light_error">#BA1B1B</color>
     <color name="light_onError">#FFFFFF</color>
-    <color name="light_background">#FCFCFF</color>
+    <color name="light_background">#F5F5F8</color>
     <color name="light_onBackground">#1A1C1E</color>
     <color name="light_surface">#FCFCFF</color>
     <color name="light_onSurface">#1A1C1E</color>
+
     <color name="dark_primary">#86CEFF</color>
     <color name="dark_onPrimary">#00344F</color>
     <color name="dark_secondary">#B7C9D9</color>
@@ -23,7 +24,7 @@
     <color name="dark_onError">#680003</color>
     <color name="dark_background">#1A1C1E</color>
     <color name="dark_onBackground">#E2E2E5</color>
-    <color name="dark_surface">#1A1C1E</color>
+    <color name="dark_surface">#16181A</color>
     <color name="dark_onSurface">#E2E2E5</color>
     <color name="dark_outline">#8B9197</color>
 

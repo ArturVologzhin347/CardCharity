@@ -5,14 +5,18 @@ import com.google.firebase.auth.FirebaseUser
 
 data class User(
     val uid: String,
-    val email: String?,
+    val email: String,
     val name: String?,
-    val photoUrl: Uri? = Uri.parse("https://via.placeholder.com/300x300")//TODO
+    val photoUrl: Uri?,
+    val createdAt: Long
 ) {
     constructor(firebaseUser: FirebaseUser) : this(
         uid = firebaseUser.uid,
-        email = firebaseUser.email,
+        email = checkNotNull(firebaseUser.email) {
+            "Email is required, check your firebase auth options"
+        },
         name = firebaseUser.displayName,
-        photoUrl = firebaseUser.photoUrl
+        photoUrl = firebaseUser.photoUrl,
+        createdAt = firebaseUser.metadata?.creationTimestamp ?: System.currentTimeMillis()
     )
 }

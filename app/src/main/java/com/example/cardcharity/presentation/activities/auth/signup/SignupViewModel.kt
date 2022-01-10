@@ -8,6 +8,8 @@ import com.example.cardcharity.domain.common.Event
 import com.example.cardcharity.presentation.base.BaseViewModel
 import com.example.cardcharity.utils.extensions.isNotEmail
 import com.example.cardcharity.utils.extensions.trimmedIsEmpty
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -24,14 +26,6 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
             _viewState.value = value
             Timber.i("Current state: $state")
         }
-
-    @Inject
-    lateinit var authorization: Authorization
-
-    override fun inject(dagger: Dagger2) {
-        super.inject(dagger)
-        dagger.repositoryComponent.inject(this)
-    }
 
     fun reduceEvent(event: SignupEvent) {
         when (event) {
@@ -50,8 +44,8 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
                 validateConfirm(password, confirm)
 
                 when (val authEvent = authorization.createUser(email, password)) {
-                    is Event.Fail -> throw authEvent.throwable //TODO
-                    is Event.Success -> SignupViewState.success()
+                    is Event.Fail -> state = handleFirebaseErrors(authEvent.throwable)
+                    is Event.Success -> state = SignupViewState.success()
                     Event.Load -> {} /* Ignore */
                 }
             }
@@ -75,7 +69,7 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
     @Throws(SignupFailHandled::class)
     private fun validatePassword(password: String) {
         when {
-            password.length < MIN_PASSWORD_LENGTH ->
+            password.trim().length < MIN_PASSWORD_LENGTH ->
                 throw SignupViewState.failInvalidPassword().handled()
         }
     }
@@ -88,8 +82,28 @@ class SignupViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
+    private fun handleFirebaseErrors(throwable: Throwable): SignupViewState.Fail {
+        return when (throwable) {
+            is FirebaseNetworkException -> SignupViewState.failNoNetworkConnection()
+            is FirebaseAuthException -> when (throwable.errorCode) {
+
+                "ERROR_INVALID_EMAIL" ->
+                    SignupViewState.failInvalidEmail()
+
+                "ERROR_EMAIL_ALREADY_IN_USE", "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" ->
+                    SignupViewState.failUserAlreadyExists()
+
+                "ERROR_WEAK_PASSWORD" ->
+                    SignupViewState.failInvalidPassword()
+
+                else -> SignupViewState.failUnknown()
+            }
+            else -> SignupViewState.failUnknown()
+        }
+    }
+
     companion object {
         private const val TAG = "SignupViewModel"
-        private const val MIN_PASSWORD_LENGTH = 6
+        const val MIN_PASSWORD_LENGTH = 6
     }
 }

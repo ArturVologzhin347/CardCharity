@@ -8,8 +8,10 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.core.os.postDelayed
 import androidx.lifecycle.lifecycleScope
+import com.example.cardcharity.domain.auth.Authorization
 import com.example.cardcharity.presentation.base.BaseActivity
 import com.example.cardcharity.repository.model.User
+import com.example.cardcharity.utils.extensions.authorization
 import com.example.cardcharity.utils.extensions.launchWhenCreated
 import kotlinx.coroutines.flow.onEach
 
@@ -20,7 +22,7 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.authorization.user.onEach {
+        authorization.user.onEach {
             next(it)
         }.launchWhenCreated(lifecycleScope)
     }
@@ -42,5 +44,4 @@ class SplashActivity : BaseActivity() {
         private const val SPLASH_DELAY = 600L
         private val handler = Handler(Looper.getMainLooper())
     }
-
 }

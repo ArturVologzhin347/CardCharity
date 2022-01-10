@@ -4,10 +4,11 @@ import com.example.cardcharity.domain.common.DataAdapter
 import com.example.cardcharity.domain.shop.ShopListModel
 import com.example.cardcharity.repository.model.Shop
 import com.example.cardcharity.utils.extensions.firstInLowercase
+import com.example.cardcharity.utils.extensions.firstInUppercase
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class ShopStickyAdapter : DataAdapter<List<Shop>, List<ShopListModel>> {
+class ShopStickyLabelsAdapter : DataAdapter<List<Shop>, List<ShopListModel>> {
     override suspend fun format(input: List<Shop>): List<ShopListModel> = suspendCoroutine {
         if (input.isEmpty()) {
             it.resume(emptyList())
@@ -19,7 +20,7 @@ class ShopStickyAdapter : DataAdapter<List<Shop>, List<ShopListModel>> {
 
             var lastCharacter: String? = null
             sorted.forEach { shop ->
-                val character = shop.name.firstInLowercase()
+                val character = shop.name.firstInUppercase()
 
                 if (character != lastCharacter) {
                     add(ShopListModel.LabelModel(label = character))
@@ -29,7 +30,6 @@ class ShopStickyAdapter : DataAdapter<List<Shop>, List<ShopListModel>> {
                 add(ShopListModel.ShopModel(shop = shop))
             }
         }
-
         it.resume(shops)
     }
 }

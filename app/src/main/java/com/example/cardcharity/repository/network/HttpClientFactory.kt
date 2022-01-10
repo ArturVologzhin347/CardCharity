@@ -4,6 +4,7 @@ package com.example.cardcharity.repository.network
 import android.content.Context
 import com.example.cardcharity.BuildConfig
 import com.example.cardcharity.repository.network.interceptor.CacheInterceptor
+import com.example.cardcharity.repository.network.interceptor.OfflineCacheInterceptor
 import com.example.cardcharity.utils.extensions.setDebugMode
 import com.example.cardcharity.utils.extensions.setupResponsesCache
 import com.example.cardcharity.utils.extensions.toUnsafe
@@ -15,16 +16,17 @@ class HttpClientFactory @Inject constructor(private val context: Context) {
 
     fun buildHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().setDebugMode(BuildConfig.DEBUG_MODE)
-        val cacheInterceptor = CacheInterceptor(context)
+        val offlineCacheInterceptor = OfflineCacheInterceptor(context)
+        val cacheInterceptor = CacheInterceptor()
 
         return OkHttpClient.Builder().apply {
-            toUnsafe()
-            networkInterceptors().add(cacheInterceptor)
-            setupResponsesCache(context, RESPONSES_CACHE_SIZE)
             addInterceptor(loggingInterceptor)
+            //setupResponsesCache(context, RESPONSES_CACHE_SIZE)
+            //addNetworkInterceptor(cacheInterceptor)
+            //addInterceptor(offlineCacheInterceptor)
+            toUnsafe()
         }.build()
     }
-
 
 
     companion object {

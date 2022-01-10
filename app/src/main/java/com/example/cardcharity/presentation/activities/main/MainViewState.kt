@@ -11,9 +11,8 @@ sealed class MainViewState {
 
     sealed class Fail : MainViewState() {
         object NoItems : Fail()
-        object NotFound : Fail()
         object NoNetworkConnection : Fail()
-        //object Failure : Fail()
+        object Unknown : Fail()
     }
 
 
@@ -25,9 +24,9 @@ sealed class MainViewState {
 
         fun failNoItems() = Fail.NoItems
 
-        fun failNotFound() = Fail.NotFound
-
         fun failNoNetworkConnection() = Fail.NoNetworkConnection
+
+        fun failUnknown() = Fail.Unknown
 
     }
 

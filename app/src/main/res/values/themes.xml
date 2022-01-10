@@ -3,7 +3,6 @@
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
-
         <item name="colorPrimary">@color/light_primary</item>
         <item name="colorOnPrimary">@color/light_onPrimary</item>
         <item name="colorSecondary">@color/light_secondary</item>
@@ -15,10 +14,9 @@
         <item name="colorSurface">@color/light_surface</item>
         <item name="colorOnSurface">@color/light_onSurface</item>
 
-
         <item name="android:statusBarColor">@color/transparent</item>
-
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
     </style>
 
 
@@ -32,16 +30,12 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="AppTheme.Crop" parent="AppTheme">
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
 
-    <style name="AppTheme.Modal" parent="AppTheme">
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
+
+
+
+
+
 
 
 

@@ -8,7 +8,7 @@ fun getMockedShops(count: Int): List<Shop> {
         repeat(count) {
             add(
                 Shop(
-                    id = 3,
+                    id = it,
                     name = getRandomString(10)
                 )
             )

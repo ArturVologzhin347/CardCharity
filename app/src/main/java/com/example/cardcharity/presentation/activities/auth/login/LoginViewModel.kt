@@ -1,6 +1,5 @@
 package com.example.cardcharity.presentation.activities.auth.login
 
-import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.example.cardcharity.R
@@ -13,6 +12,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -20,7 +21,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
-    private val _viewState = MutableStateFlow<LoginViewState>(LoginViewState.default())
+    private val _viewState = MutableStateFlow<LoginViewState>(default())
     val viewState = _viewState.asStateFlow()
 
 
@@ -38,48 +39,34 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             requestEmail()
         }.build()
 
-    @Inject
-    lateinit var authorization: Authorization
-
-    override fun inject(dagger: Dagger2) {
-        super.inject(dagger)
-        dagger.repositoryComponent.inject(this)
-    }
 
     fun reduceEvent(event: LoginEvent) {
         when (event) {
-            is LoginEvent.LoginWithEmailAndPassword -> loginWithEmailAndPasswordEvent(event)
+            is LoginWithEmailAndPassword -> loginWithEmailAndPasswordEvent(event)
             else -> throw NotImplementedError("Event $event is not implemented in $TAG")
         }
     }
 
     private fun loginWithEmailAndPasswordEvent(
-        event: LoginEvent.LoginWithEmailAndPassword
+        event: LoginWithEmailAndPassword
     ) = viewModelScope.launch {
-        state = LoginViewState.load()
+        state = load()
 
         try {
             with(event) {
                 validateEmail(email)
                 validatePassword(password)
 
-                //authorization.loginWithEmailAndPassword(email, password)
-                when(val authEvent = authorization.loginWithEmailAndPassword(email, password)) {
-                    is Event.Fail -> {
-                        Timber.e(authEvent.throwable)
-                        state = LoginViewState.default()
-                    }
-
-                    is Event.Success -> state = LoginViewState.success()
+                when (val authEvent = authorization.loginWithEmailAndPassword(email, password)) {
+                    is Event.Fail -> state = handleFirebaseErrors(authEvent.throwable)
+                    is Event.Success -> state = success()
                     Event.Load -> {} /* Ignore */
                 }
-
-
             }
         } catch (handled: LoginFailHandled) {
             state = handled.fail
         } catch (e: Exception) {
-            state = LoginViewState.failNoNetworkConnection()
+            state = failNoNetworkConnection()
             Timber.w(e)
         }
     }
@@ -88,7 +75,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     private fun validateEmail(email: String) {
         when {
             email.trimmedIsEmpty() ->
-                throw LoginViewState.failEmailEmpty().handled()
+                throw failEmailEmpty().handled()
         }
     }
 
@@ -96,27 +83,40 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     private fun validatePassword(password: String) {
         when {
             password.trimmedIsEmpty() ->
-                throw LoginViewState.failPasswordEmpty().handled()
+                throw failPasswordEmpty().handled()
+        }
+    }
+
+    private fun handleFirebaseErrors(throwable: Throwable): Fail {
+        return when (throwable) {
+            is FirebaseNetworkException -> failNoNetworkConnection()
+            is FirebaseAuthException -> when (throwable.errorCode) {
+                "ERROR_USER_NOT_FOUND", "ERROR_INVALID_EMAIL" ->
+                    failUserDoesNotExist()
+                "ERROR_WRONG_PASSWORD" -> failWrongPassword()
+                else -> failUnknown()
+            }
+            else -> failUnknown()
         }
     }
 
     fun loginWithGoogle(
         task: Task<GoogleSignInAccount>
     ) = viewModelScope.launch {
-        state = LoginViewState.load()
+        state = load()
 
         try {
             val account = checkNotNull(task.getResult(ApiException::class.java))
             val idToken = checkNotNull(account.idToken)
             when (val event = authorization.loginWithGoogle(idToken)) {
                 is Event.Fail -> throw event.throwable
-                is Event.Success -> state = LoginViewState.success()
+                is Event.Success -> state = success()
                 Event.Load -> {} /* Ignore */
             }
 
         } catch (e: Exception) {
             Timber.w(e)
-            state = LoginViewState.failGoogleAuth()
+            state = failGoogleAuth()
         }
     }
 

@@ -20,6 +20,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cardcharity.R
@@ -161,9 +162,9 @@ fun AuthHelperText(
         modifier = modifier
             .padding(
                 start = 40.dp,
-                end = 24.dp
+                end = 24.dp,
+                top = 2.dp
             )
-            .padding(top = 2.dp)
     )
 }
 
@@ -179,7 +180,8 @@ fun AuthTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions()
+    keyboardActions: KeyboardActions = KeyboardActions(),
+    paddingHorizontal: Dp = 24.dp
 ) {
     AdvancedTextField(
         value = value,
@@ -193,7 +195,7 @@ fun AuthTextField(
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         modifier = modifier
-            .padding(horizontal = 24.dp)
+            .padding(horizontal = paddingHorizontal)
             .fillMaxWidth()
     )
 }
@@ -212,8 +214,6 @@ fun AdvancedTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions()
-
-
 ) {
     OutlinedTextField(
         value = value,
@@ -222,11 +222,9 @@ fun AdvancedTextField(
         label = { TextFieldLabel(label) },
         singleLine = true,
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            backgroundColor = MaterialTheme.colors.surface8Primary,
-            focusedBorderColor = Color.Transparent,
-            unfocusedBorderColor = Color.Transparent,
-
-            ),
+            backgroundColor = MaterialTheme.colors.surface,
+            //TODO
+        ),
         isError = isError,
         placeholder = placeholder,
         leadingIcon = leadingIcon,

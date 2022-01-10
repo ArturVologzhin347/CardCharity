@@ -2,6 +2,7 @@ package com.example.cardcharity.domain.auth
 
 import com.example.cardcharity.domain.common.Event
 import com.example.cardcharity.repository.model.User
+import com.example.cardcharity.utils.extensions.isEmail
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -35,10 +36,20 @@ class Authorization @Inject constructor() {
         }
     }
 
-    fun sendForgotPasswordMail(email: String) {
-        firebaseAuth.sendPasswordResetEmail(email)
+    fun resetPassword(oldPassword: String, newPassword: String) {
+
     }
 
+    fun sendForgotPasswordMail(email: String) {
+        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener {
+            //TODO
+        }
+    }
+
+    fun signOut() {
+        _user.value = null
+        firebaseAuth.signOut()
+    }
 
     suspend fun createUser(
         email: String,
@@ -77,7 +88,7 @@ class Authorization @Inject constructor() {
         }
 
         if (result.isSuccessful) {
-            val firebaseUser = this.firebaseUser
+            val firebaseUser = firebaseUser
             if (firebaseUser != null) {
 
                 with(User(firebaseUser)) {
@@ -85,12 +96,13 @@ class Authorization @Inject constructor() {
                     continuation.resume(Event.success(this))
                 }
 
-                Timber.d("Google login successful, email: ${firebaseUser.email}")
+                Timber.d("Authorized, email: ${firebaseUser.email}")
             }
         } else {
             _user.value = null
             continuation.resume(Event.fail(checkNotNull(result.exception)))
-            Timber.w("Google login failure", result.exception)
+            Timber.w("Authorization failure")
+            Timber.w(result.exception)
         }
     }
 }

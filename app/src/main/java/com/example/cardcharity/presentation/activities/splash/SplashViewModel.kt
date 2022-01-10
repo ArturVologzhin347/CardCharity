@@ -17,16 +17,12 @@ import kotlin.reflect.KClass
 class SplashViewModel(application: Application) : BaseViewModel(application) {
 
     @Inject
-    lateinit var authorization: Authorization
-
-    @Inject
     lateinit var preferences: Preferences
 
     override fun inject(dagger: Dagger2) {
         super.inject(dagger)
         dagger.repositoryComponent.inject(this)
     }
-
 
     fun next(user: User?) {
         val destination = getDestination(user)
@@ -43,7 +39,7 @@ class SplashViewModel(application: Application) : BaseViewModel(application) {
             return WelcomeActivity::class
         }
 
-        if(user.isAuthorized()) {
+        if(user.isAuthorized) {
             return MainActivity::class
         }
 

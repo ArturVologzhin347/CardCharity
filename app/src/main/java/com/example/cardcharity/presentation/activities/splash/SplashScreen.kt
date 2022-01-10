@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cardcharity.R
 import com.example.cardcharity.presentation.theme.CardCharityTheme
+import com.example.cardcharity.presentation.theme.PreviewTheme
 
 @Composable
 fun SplashScreen() {
@@ -40,7 +41,7 @@ fun SplashScreen() {
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    CardCharityTheme {
+    PreviewTheme {
         SplashScreen()
     }
 }

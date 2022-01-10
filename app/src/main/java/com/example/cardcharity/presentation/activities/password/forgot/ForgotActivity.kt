@@ -6,6 +6,16 @@ import android.os.Bundle
 import androidx.compose.runtime.Composable
 import com.example.cardcharity.presentation.base.BaseActivity
 
+/*
+- back button
+- label (reset password)
+- email field
+- button (enabled only if email is valid), with loading and success states
+- text
+-
+
+
+ */
 class ForgotActivity : BaseActivity() {
 
 
@@ -19,7 +29,7 @@ class ForgotActivity : BaseActivity() {
 
     @Composable
     override fun Screen() {
-
+        ForgotScreen()
     }
 
 

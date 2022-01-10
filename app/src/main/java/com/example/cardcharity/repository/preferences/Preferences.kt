@@ -11,6 +11,7 @@ import javax.inject.Singleton
 class Preferences @Inject constructor(private val store: PreferencesStore) {
     private var defaultValuesInitialized by PrefDelegate(store, false)
     var hasVisited by PrefDelegate(store, false)
+    var highlightCode by PrefDelegate(store, true)
 
     var theme: DarkThemeManager.Theme
         get() {

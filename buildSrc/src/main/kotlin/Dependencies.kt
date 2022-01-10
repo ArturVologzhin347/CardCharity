@@ -34,7 +34,7 @@ object Dependencies {
 
     object Accompanist {
         const val insets = "com.google.accompanist:accompanist-insets-ui:0.21.5-rc"
-        const val systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.18.0"
+        const val systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.22.0-rc"
     }
 
     object Material {
