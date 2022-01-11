@@ -1,38 +1,39 @@
 package com.example.cardcharity.presentation.activities.settings
 
-sealed class SettingsEvent {
+import com.example.cardcharity.presentation.base.mvi.MviEvent
 
-    object Back : SettingsEvent()
+sealed class SettingsEvent: MviEvent
 
-    object SignOut : SettingsEvent()
+object Finish : SettingsEvent()
 
-    object AboutApp : SettingsEvent()
+object SignOut : SettingsEvent()
 
-    object ResetPassword : SettingsEvent()
+object AboutApp : SettingsEvent()
 
-    data class NightMode(val enabled: Boolean) : SettingsEvent()
+object ResetPassword : SettingsEvent()
 
-    data class SyncWithSystemTheme(val enabled: Boolean, val nightMode: Boolean) : SettingsEvent()
+data class NightMode(val enabled: Boolean) : SettingsEvent()
 
-    data class HighlightCode(val enabled: Boolean) : SettingsEvent()
+data class SyncWithSystemTheme(val enabled: Boolean, val nightMode: Boolean) : SettingsEvent()
 
-    companion object {
+data class HighlightCode(val enabled: Boolean) : SettingsEvent()
 
-        fun back() = Back
 
-        fun signOut() = SignOut
+fun finish() = Finish
 
-        fun aboutApp() = AboutApp
+fun signOut() = SignOut
 
-        fun resetPassword() = ResetPassword
+fun aboutApp() = AboutApp
 
-        fun nightMode(enabled: Boolean) = NightMode(enabled)
+fun resetPassword() = ResetPassword
 
-        fun syncWithSystemTheme(enabled: Boolean, nightMode: Boolean) =
-            SyncWithSystemTheme(enabled, nightMode)
+fun nightMode(enabled: Boolean) = NightMode(enabled)
 
-        fun highlightCode(enabled: Boolean) = HighlightCode(enabled)
+fun syncWithSystemTheme(enabled: Boolean, nightMode: Boolean) =
+    SyncWithSystemTheme(enabled, nightMode)
 
-    }
+fun highlightCode(enabled: Boolean) = HighlightCode(enabled)
 
-}
+
+
+

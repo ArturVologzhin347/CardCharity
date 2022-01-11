@@ -1,23 +1,22 @@
 package com.example.cardcharity.presentation.activities.main
 
-sealed class MainEvent {
+import com.example.cardcharity.presentation.base.mvi.MviEvent
 
-    object Settings : MainEvent()
+sealed class MainEvent: MviEvent
 
-    object Refresh : MainEvent()
+object Settings : MainEvent()
 
-    object Search : MainEvent()
+object Refresh : MainEvent()
 
-
-    companion object {
-
-        fun settings() = Settings
-
-        fun refresh() = Refresh
-
-        fun search() = Search
-
-    }
+object Search : MainEvent()
 
 
-}
+fun settings() = Settings
+
+fun refresh() = Refresh
+
+fun search() = Search
+
+
+
+

@@ -19,7 +19,6 @@ val Context.authorization: Authorization
 val Context.okHttpClient: OkHttpClient
     get() = app.okHttpClient
 
-
 private val Context.app: App
     get() = when(this) {
         is App -> this

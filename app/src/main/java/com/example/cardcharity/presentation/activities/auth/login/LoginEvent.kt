@@ -1,6 +1,8 @@
 package com.example.cardcharity.presentation.activities.auth.login
 
-sealed class LoginEvent
+import com.example.cardcharity.presentation.base.mvi.MviEvent
+
+sealed class LoginEvent: MviEvent
 
 object Go : LoginEvent()
 

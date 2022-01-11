@@ -14,6 +14,7 @@ import javax.inject.Inject
 
 class HttpClientFactory @Inject constructor(private val context: Context) {
 
+    //TODO
     fun buildHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().setDebugMode(BuildConfig.DEBUG_MODE)
         val offlineCacheInterceptor = OfflineCacheInterceptor(context)

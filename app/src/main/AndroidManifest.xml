@@ -37,11 +37,11 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".presentation.activities.password.forgot.ForgotActivity"
+            android:name=".presentation.activities.main.search.SearchActivity"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".presentation.activities.password.reset.ResetPasswordActivity"
+            android:name="com.example.cardcharity.presentation.activities.reset.ResetActivity"
             android:windowSoftInputMode="adjustResize" />
 
 

@@ -1,20 +1,20 @@
-- снести всё нахуй из reset password, сделать из него forgot password и забить ХУЙ
+- fix cache
+- clear favorite shops on sign out
+- search
+- about activity (start)
+- welcome activity
+-
 
 
-- rename back event to finish
-- refactor sealed classes
-- переписать базовый класс вью модели и активити, адаптировав их под работу с ивентами
-- move focus to error locale (text fields)
+- avatar placeholder
+
+
+
+
 
 - greetings in splash activity
-
-
 - Search activity (нахождение по принципу search in name)
 - last shops
-
-
-
-
 
 
 

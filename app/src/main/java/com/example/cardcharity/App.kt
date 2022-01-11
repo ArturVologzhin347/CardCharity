@@ -39,7 +39,6 @@ class App : Application() {
             repositoryComponent.inject(this@App)
         }
 
-
         preferences.setupDefaultValues()
     }
 

@@ -1,33 +1,28 @@
 package com.example.cardcharity.presentation.activities.main
 
 import com.example.cardcharity.domain.shop.ShopListModel
+import com.example.cardcharity.presentation.base.mvi.MviViewState
+
+sealed class MainViewState: MviViewState
+
+object Load : MainViewState()
+
+data class Success(val shops: List<ShopListModel>) : MainViewState()
+
+sealed class Fail : MainViewState()
+
+object NoItems : Fail()
+object NoNetwork : Fail()
+object Unknown : Fail()
 
 
-sealed class MainViewState {
+fun load() = Load
 
-    object Load : MainViewState()
+fun success(shops: List<ShopListModel>) = Success(shops)
 
-    data class Success(val shops: List<ShopListModel>) : MainViewState()
+fun failNoItems() = NoItems
 
-    sealed class Fail : MainViewState() {
-        object NoItems : Fail()
-        object NoNetworkConnection : Fail()
-        object Unknown : Fail()
-    }
+fun failNoNetwork() = NoNetwork
 
+fun failUnknown() = Unknown
 
-    companion object {
-
-        fun load() = Load
-
-        fun success(shops: List<ShopListModel>) = Success(shops)
-
-        fun failNoItems() = Fail.NoItems
-
-        fun failNoNetworkConnection() = Fail.NoNetworkConnection
-
-        fun failUnknown() = Fail.Unknown
-
-    }
-
-}

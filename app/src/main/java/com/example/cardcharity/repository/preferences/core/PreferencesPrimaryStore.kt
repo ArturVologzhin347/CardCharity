@@ -11,7 +11,6 @@ abstract class PreferencesPrimaryStore(
     protected val preferences: SharedPreferences
 ) {
 
-
     fun setBoolean(key: String, value: Boolean) {
         edit { it.putBoolean(key, value) }
     }

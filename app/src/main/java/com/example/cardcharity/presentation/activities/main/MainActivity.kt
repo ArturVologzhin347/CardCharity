@@ -8,17 +8,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.cardcharity.presentation.activities.main.search.SearchActivity
 import com.example.cardcharity.presentation.activities.settings.SettingsActivity
-import com.example.cardcharity.presentation.base.BaseActivity
+import com.example.cardcharity.presentation.base.mvi.MviActivity
 import com.example.cardcharity.utils.extensions.authorization
 import com.example.cardcharity.utils.extensions.launchWhenStarted
 import com.example.cardcharity.utils.extensions.openActivity
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 
-class MainActivity : BaseActivity() {
-    private val viewModel: MainViewModel by viewModels()
+class MainActivity : MviActivity<MainViewState, MainEvent, MainViewModel>() {
+    override val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -28,38 +28,29 @@ class MainActivity : BaseActivity() {
         viewModel.rawShops.onEach { shops ->
             shops?.let { viewModel.fetchFormatData(it) }
         }.launchWhenStarted(lifecycleScope)
-
-
-        //TODO
-        authorization.user.onEach { user ->
-            user?.let { Timber.e(it.toString()) }
-        }.launchWhenStarted(lifecycleScope)
     }
 
     @Composable
-    override fun Screen() {
-        val systemUiController = rememberSystemUiController()
-        val viewState = viewModel.viewState.collectAsState()
+    override fun Screen(reduce: (event: MainEvent) -> Unit, viewState: MainViewState) {
         val user = authorization.user.collectAsState()
-
-        SideEffect {
-            systemUiController.setStatusBarColor(Color.Transparent)
+        rememberSystemUiController().apply {
+            SideEffect {
+                setStatusBarColor(Color.Transparent)
+            }
         }
 
         MainScreen(
-            reduce = { event -> reduceEvent(event) },
-            user = user.value,
-            viewState = viewState.value
+            reduce = reduce,
+            viewState = viewState,
+            user = user.value
         )
     }
 
-    private fun reduceEvent(event: MainEvent) {
-        Timber.d("Reducing event: $event")
-
+    override fun reduceEvent(event: MainEvent) {
         when (event) {
-            MainEvent.Settings -> settingsEvent()
-            MainEvent.Search -> searchEvent()
-            else -> viewModel.reduceEvent(event)
+            Settings -> settingsEvent()
+            Search -> searchEvent()
+            else -> super.reduceEvent(event)
         }
     }
 
@@ -68,8 +59,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun searchEvent() {
-        TODO()
+        openActivity(this, SearchActivity::class)
     }
-
-
 }

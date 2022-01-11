@@ -33,13 +33,6 @@ import com.example.cardcharity.R
 import com.example.cardcharity.presentation.theme.PreviewTheme
 import com.example.cardcharity.presentation.ui.elements.*
 
-
-/*
-- signup button
-- google button
- */
-
-
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreen(
@@ -68,8 +61,8 @@ fun LoginScreen(
             EmailTextField(
                 email = email,
                 onEmailChange = { email = it },
-                isError = viewState.failOrNot(Fail.Locale.EMAIL),
-                helperText = viewState.failMessageOrEmpty(Fail.Locale.EMAIL),
+                isError = viewState.failOrNot(Locale.EMAIL),
+                helperText = viewState.failMessageOrEmpty(Locale.EMAIL),
                 focusManager = focusManager
             )
 
@@ -78,8 +71,8 @@ fun LoginScreen(
             PasswordTextField(
                 password = password,
                 onPasswordChange = { password = it },
-                isError = viewState.failOrNot(Fail.Locale.PASSWORD),
-                helperText = viewState.failMessageOrEmpty(Fail.Locale.PASSWORD),
+                isError = viewState.failOrNot(Locale.PASSWORD),
+                helperText = viewState.failMessageOrEmpty(Locale.PASSWORD),
                 keyboardActions = KeyboardActions(
                     onDone = {
                         keyboardController?.hide()

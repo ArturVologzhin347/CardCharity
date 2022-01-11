@@ -10,9 +10,13 @@
     <string name="select_shop">Select shop:</string>
     <string name="search">Search</string>
 
+    <string name="ok">OK</string>
     <string name="or">Or</string>
     <string name="back">Back</string>
     <string name="refresh">Refresh</string>
+    <string name="send_mail">Send mail</string>
+    <string name="mail_was_sent_to">The mail was sent to</string>
+
 
 
     <string name="settings">Settings</string>
@@ -53,6 +57,12 @@
     <string name="password_new">Your new password</string>
     <string name="password_repeat">Repeat Your new password</string>
     <string name="reset">Reset</string>
+    <string name="reset_text">We will send an mail for reset Your password to the this email address.</string>
+
+
+    <!--TODO-->
+    <string name="reset_email_send">Email was sent</string>
+    <string name="reset_email_send_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 
 
 

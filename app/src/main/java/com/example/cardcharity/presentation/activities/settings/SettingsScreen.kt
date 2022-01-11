@@ -35,14 +35,14 @@ import com.example.cardcharity.utils.ifNull
 @Composable
 fun SettingsScreen(
     reduce: (event: SettingsEvent) -> Unit,
-    user: User?,
-    viewState: SettingsViewState
+    viewState: SettingsViewState,
+    user: User?
 ) {
     user.ifNull { return }
 
     val backdropState = rememberBackdropScaffoldState(initialValue = BackdropValue.Revealed)
 
-    
+
     BackdropScaffold(
         scaffoldState = backdropState,
         appBar = {},
@@ -92,7 +92,7 @@ fun SettingsFrontLayerContent(
                         checked = viewState.nightMode,
                         enabled = viewState.nightModeEnabled,
                         onCheckedChange = { checked ->
-                            reduce(SettingsEvent.nightMode(checked))
+                            reduce(nightMode(checked))
                         })
                 },
                 {
@@ -101,7 +101,7 @@ fun SettingsFrontLayerContent(
                         enabled = viewState.syncWithSystemThemeEnabled,
                         onCheckedChange = { checked ->
                             reduce(
-                                SettingsEvent.syncWithSystemTheme(
+                                syncWithSystemTheme(
                                     enabled = checked,
                                     nightMode = nightMode
                                 )
@@ -123,14 +123,14 @@ fun SettingsFrontLayerContent(
                     SettingHighlightCode(
                         checked = viewState.highlightCode,
                         onCheckedChange = { checked ->
-                            reduce(SettingsEvent.highlightCode(checked))
+                            reduce(highlightCode(checked))
                         }
                     )
                 },
                 {
                     SettingResetPassword(
                         onClick = {
-                            reduce(SettingsEvent.resetPassword())
+                            reduce(resetPassword())
                         }
                     )
                 },
@@ -142,7 +142,11 @@ fun SettingsFrontLayerContent(
         SettingItemsContainer(
             header = {},
             items = listOf {
-                SettingAboutApp(onClick = { reduce(SettingsEvent.aboutApp()) })
+                SettingAboutApp(
+                    onClick = {
+                        reduce(aboutApp())
+                    }
+                )
             }
         )
 
@@ -498,7 +502,7 @@ fun TopAppBar(reduce: (event: SettingsEvent) -> Unit) {
         isOpen = showSignOutDialog,
         onSignOut = {
             showSignOutDialog.value = false
-            reduce(SettingsEvent.signOut())
+            reduce(signOut())
         }
     )
 
@@ -507,7 +511,11 @@ fun TopAppBar(reduce: (event: SettingsEvent) -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth()
     ) {
-        BackButton(onClick = { reduce(SettingsEvent.back()) })
+        BackButton(
+            onClick = {
+                reduce(finish())
+            }
+        )
         TopButton(
             onClick = { showSignOutDialog.value = true },
             painter = painterResource(R.drawable.ic_logout_24)
@@ -522,11 +530,7 @@ fun SettingsScreenPreview() {
         SettingsScreen(
             reduce = {},
             user = previewUser,
-            viewState = SettingsViewState.default(
-                nightMode = false,
-                syncWithSystemTheme = true,
-                highlightCode = true
-            )
+            viewState = initial()
         )
     }
 }

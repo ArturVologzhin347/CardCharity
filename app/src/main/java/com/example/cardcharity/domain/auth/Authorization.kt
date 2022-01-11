@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -23,6 +24,9 @@ import kotlin.coroutines.suspendCoroutine
 class Authorization @Inject constructor() {
     private val _user = MutableStateFlow<User?>(null)
     val user = _user.asStateFlow()
+
+    val email: String?
+        get() = user.value?.email
 
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
@@ -36,13 +40,16 @@ class Authorization @Inject constructor() {
         }
     }
 
-    fun resetPassword(oldPassword: String, newPassword: String) {
 
-    }
 
-    fun sendForgotPasswordMail(email: String) {
-        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener {
-            //TODO
+    suspend fun sendForgotPasswordMail(
+        email: String,
+        call: (isSuccessful: Boolean) -> Unit
+    ) = withContext(Dispatchers.IO) {
+        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+            if (task.isComplete) {
+                call(task.isSuccessful)
+            }
         }
     }
 

@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cardcharity.R
-import com.example.cardcharity.presentation.activities.auth.login.LoginViewState
 import com.example.cardcharity.presentation.theme.PreviewTheme
 import com.example.cardcharity.presentation.ui.elements.*
 
@@ -35,6 +34,7 @@ fun SignupScreen(
     reduce: (event: SignupEvent) -> Unit,
     viewState: SignupViewState
 ) {
+
     val context = LocalContext.current
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -60,8 +60,8 @@ fun SignupScreen(
                 EmailTextField(
                     email = email,
                     onEmailChange = { email = it },
-                    isError = viewState.failOrNot(Fail.Locale.EMAIL),
-                    helperText = viewState.failMessageOrEmpty(Fail.Locale.EMAIL),
+                    isError = viewState.failOrNot(Locale.EMAIL),
+                    helperText = viewState.failMessageOrEmpty(Locale.EMAIL),
                     focusManager = focusManager
                 )
 
@@ -70,9 +70,9 @@ fun SignupScreen(
                 PasswordTextField(
                     password = password,
                     onPasswordChange = { password = it },
-                    helperText = viewState.failMessageOrNull(Fail.Locale.PASSWORD)
+                    helperText = viewState.failMessageOrNull(Locale.PASSWORD)
                         ?: stringResource(R.string.password_help),
-                    isError = viewState.failOrNot(Fail.Locale.PASSWORD),
+                    isError = viewState.failOrNot(Locale.PASSWORD),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,
                         imeAction = ImeAction.Next
@@ -88,7 +88,7 @@ fun SignupScreen(
                 VerticalSpace(24.dp)
 
 
-                val isConfirmError = viewState.failOrNot(Fail.Locale.CONFIRM)
+                val isConfirmError = viewState.failOrNot(Locale.CONFIRM)
                 LaunchedEffect(isConfirmError) {
                     if (isConfirmError) {
                         confirm = ""
@@ -99,7 +99,7 @@ fun SignupScreen(
                     password = confirm,
                     onPasswordChange = { confirm = it },
                     isError = isConfirmError,
-                    helperText = viewState.failMessageOrEmpty(Fail.Locale.CONFIRM),
+                    helperText = viewState.failMessageOrEmpty(Locale.CONFIRM),
                     keyboardActions = KeyboardActions(
                         onDone = {
                             keyboardController?.hide()

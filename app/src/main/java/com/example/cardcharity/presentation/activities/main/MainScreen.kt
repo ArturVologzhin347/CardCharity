@@ -35,8 +35,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(
     reduce: (event: MainEvent) -> Unit,
-    user: User?,
-    viewState: MainViewState
+    viewState: MainViewState,
+    user: User?
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
@@ -142,8 +142,8 @@ fun MainBackLayerContent(
 
         MainTopBar(
             user = user,
-            onAvatarClick = { reduce(MainEvent.settings()) },
-            onSearchClick = { reduce(MainEvent.search()) }
+            onAvatarClick = { reduce(settings()) },
+            onSearchClick = { reduce(search()) }
         )
         VerticalSpace(8.dp)
         //SelectShopLabel()
@@ -198,7 +198,6 @@ fun MainTopBar(
             painter = painterResource(R.drawable.ic_search_24)
         )
     }
-
 }
 
 @Composable
@@ -207,21 +206,20 @@ fun MainFrontLayerContent(
     reduce: (event: MainEvent) -> Unit,
     onItemClick: (shop: Shop) -> Unit
 ) {
-    val refresh = { reduce(MainEvent.refresh()) }
+    val refresh = { reduce(refresh()) }
 
     when (viewState) {
-
-        is MainViewState.Success -> {
+        is Success -> {
             MainShopList(
                 shops = viewState.shops,
                 onItemClick = onItemClick
             )
         }
 
-        MainViewState.Load -> MainLoad()
-        MainViewState.Fail.NoNetworkConnection -> MailFailNetworkConnection(refresh)
-        MainViewState.Fail.NoItems -> MainFailNoItems(refresh)
-        MainViewState.Fail.Unknown -> MainFailUnknown(refresh)
+        Load -> MainLoad()
+        NoNetwork -> MailFailNetworkConnection(refresh)
+        NoItems -> MainFailNoItems(refresh)
+        Unknown -> MainFailUnknown(refresh)
     }
 }
 
@@ -336,7 +334,7 @@ fun MainScreenPreview() {
         MainScreen(
             reduce = {},
             user = previewUser,
-            viewState = MainViewState.load()
+            viewState = load()
         )
     }
 }

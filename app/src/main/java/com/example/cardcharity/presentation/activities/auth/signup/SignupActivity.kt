@@ -7,54 +7,40 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.core.os.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.example.cardcharity.R
-import com.example.cardcharity.presentation.activities.auth.login.LoginActivity
-import com.example.cardcharity.presentation.activities.auth.login.LoginEvent
-import com.example.cardcharity.presentation.activities.auth.login.LoginViewState
 import com.example.cardcharity.presentation.activities.main.MainActivity
-import com.example.cardcharity.presentation.base.BaseActivity
+import com.example.cardcharity.presentation.base.mvi.MviActivity
 import com.example.cardcharity.utils.extensions.launchWhenStarted
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 
-class SignupActivity : BaseActivity() {
-    private val viewModel: SignupViewModel by viewModels()
+class SignupActivity : MviActivity<SignupViewState, SignupEvent, SignupViewModel>() {
+    override val viewModel: SignupViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel.viewState.onEach { state ->
-            if (state is Success) {
-                reduceEvent(go())
-            }
+            if (state is Success) reduceEvent(go())
         }.launchWhenStarted(lifecycleScope)
     }
 
     @Composable
-    override fun Screen() {
-        val viewState = viewModel.viewState.collectAsState()
-
+    override fun Screen(reduce: (event: SignupEvent) -> Unit, viewState: SignupViewState) {
         SignupScreen(
-            reduce = { event -> reduceEvent(event) },
-            viewState = viewState.value
+            reduce = reduce,
+            viewState = viewState
         )
     }
 
-    private fun reduceEvent(event: SignupEvent) {
-        Timber.d("Reducing event: $event")
-
-        if (viewModel.state == Load) {
-            Timber.i("Cannot reduce event $event because state is Load")
-            return
-        }
+    override fun reduceEvent(event: SignupEvent) {
+        if (viewModel.state == Load) return
 
         when (event) {
             Back -> finish()
             Go -> goEvent()
-            else -> viewModel.reduceEvent(event)
+            else -> super.reduceEvent(event)
         }
     }
 

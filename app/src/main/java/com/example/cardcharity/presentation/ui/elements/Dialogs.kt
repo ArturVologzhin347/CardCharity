@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
@@ -26,6 +27,28 @@ import com.example.cardcharity.R
 import com.example.cardcharity.presentation.theme.surface8Primary
 
 @Composable
+fun ResetPasswordDialog(
+    isOpen: MutableState<Boolean>,
+    onClick: () -> Unit,
+    email: String
+) {
+    BaseDialog(
+        isOpen = isOpen,
+        painter = painterResource(R.drawable.ic_send_24),
+        label = stringResource(R.string.reset_email_send),
+        text = "${stringResource(R.string.mail_was_sent_to)} $email.",
+        buttons = arrayOf(
+            {
+                BaseDialogButton(
+                    onClick = onClick,
+                    text = stringResource(R.string.ok)
+                )
+            }
+        )
+    )
+}
+
+@Composable
 fun SignOutDialog(
     isOpen: MutableState<Boolean>,
     onSignOut: () -> Unit
@@ -35,10 +58,21 @@ fun SignOutDialog(
         painter = painterResource(R.drawable.ic_logout_24),
         label = stringResource(R.string.sign_out_from_your_account),
         text = stringResource(R.string.sign_out_help),
-        negativeLabel = stringResource(R.string.back),
-        positiveLabel = stringResource(R.string.sign_out),
-        onNegative = { isOpen.value = false },
-        onPositive = onSignOut
+        buttons = arrayOf(
+            {
+                BaseDialogButton(
+                    onClick = { isOpen.value = false },
+                    text = stringResource(R.string.back),
+                    color = MaterialTheme.colors.onBackground.copy(alpha = 0.54F)
+                )
+            },
+            {
+                BaseDialogButton(
+                    onClick = onSignOut,
+                    text = stringResource(R.string.sign_out)
+                )
+            }
+        ),
     )
 }
 
@@ -48,10 +82,7 @@ fun BaseDialog(
     painter: Painter,
     label: String,
     text: String,
-    negativeLabel: String,
-    positiveLabel: String,
-    onNegative: () -> Unit,
-    onPositive: () -> Unit
+    buttons: Array<@Composable RowScope.() -> Unit>
 ) {
     CustomDialog(isOpen = isOpen) {
         Card(
@@ -103,19 +134,7 @@ fun BaseDialog(
                         .background(MaterialTheme.colors.surface8Primary)
                         .fillMaxWidth()
                         .height(56.dp)
-                ) {
-
-                    BaseDialogButton(
-                        onClick = onNegative,
-                        text = negativeLabel
-                    )
-
-                    BaseDialogButton(
-                        onClick = onPositive,
-                        text = positiveLabel
-                    )
-
-                }
+                ) { buttons.forEach { button -> button() } }
             }
         }
     }
@@ -124,7 +143,8 @@ fun BaseDialog(
 @Composable
 private fun RowScope.BaseDialogButton(
     onClick: () -> Unit,
-    text: String
+    text: String,
+    color: Color = MaterialTheme.colors.primary
 ) {
     TextButton(
         onClick = onClick,
@@ -137,7 +157,7 @@ private fun RowScope.BaseDialogButton(
             text = text,
             maxLines = 1,
             style = MaterialTheme.typography.button,
-            color = MaterialTheme.colors.primary
+            color = color
         )
     }
 }

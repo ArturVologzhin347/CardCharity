@@ -4,16 +4,14 @@ import android.app.Application
 import android.content.Intent
 import com.example.cardcharity.di.Dagger2
 import com.example.cardcharity.presentation.activities.splash.SplashActivity
-import com.example.cardcharity.presentation.base.BaseViewModel
+import com.example.cardcharity.presentation.base.mvi.MviViewModel
 import com.example.cardcharity.presentation.theme.DarkThemeManager
 import com.example.cardcharity.repository.preferences.Preferences
 import com.example.cardcharity.utils.checkOrNull
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import timber.log.Timber
 import javax.inject.Inject
 
-class SettingsViewModel(application: Application) : BaseViewModel(application) {
+class SettingsViewModel(application: Application) :
+    MviViewModel<SettingsViewState, SettingsEvent>(initial(), application) {
 
     @Inject
     lateinit var preferences: Preferences
@@ -38,24 +36,18 @@ class SettingsViewModel(application: Application) : BaseViewModel(application) {
             preferences.highlightCode = value
         }
 
-    private val _viewState = MutableStateFlow(getCurrentViewState())
-    val viewState = _viewState.asStateFlow()
 
-    var state: SettingsViewState
-        get() = viewState.value
-        private set(value) {
-            _viewState.value = value
-            Timber.i("Current state: $state")
-        }
+    init {
+        refreshState()
+    }
 
-
-    fun reduceEvent(event: SettingsEvent) {
+    override fun reduceEvent(event: SettingsEvent) {
         when (event) {
-            is SettingsEvent.NightMode -> nightModeEvent(event.enabled)
-            is SettingsEvent.SyncWithSystemTheme -> syncWithSystemThemeEvent(event)
-            is SettingsEvent.HighlightCode -> highlightCodeEvent(event.enabled)
-            SettingsEvent.SignOut -> signOutEvent()
-            else -> throw NotImplementedError("Event $event is not implemented in $TAG")
+            is NightMode -> nightModeEvent(event.enabled)
+            is SyncWithSystemTheme -> syncWithSystemThemeEvent(event)
+            is HighlightCode -> highlightCodeEvent(event.enabled)
+            SignOut -> signOutEvent()
+            else -> super.reduceEvent(event)
         }
     }
 
@@ -67,13 +59,14 @@ class SettingsViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
-    private fun syncWithSystemThemeEvent(event: SettingsEvent.SyncWithSystemTheme) {
+    private fun syncWithSystemThemeEvent(event: SyncWithSystemTheme) {
         checkOrNull(state.syncWithSystemThemeEnabled) ?: return
         with(themeManager) {
             setSyncWithSystemTheme(
                 localInNightMode = event.nightMode,
                 synchronized = event.enabled
             )
+
             refreshState()
         }
     }
@@ -94,7 +87,7 @@ class SettingsViewModel(application: Application) : BaseViewModel(application) {
 
 
     private fun getCurrentViewState(): SettingsViewState {
-        return SettingsViewState.default(
+        return default(
             nightMode = nightMode,
             syncWithSystemTheme = syncWithSystemTheme,
             highlightCode = highlightCode
@@ -103,10 +96,5 @@ class SettingsViewModel(application: Application) : BaseViewModel(application) {
 
     private fun refreshState() {
         state = getCurrentViewState()
-    }
-
-
-    companion object {
-        private const val TAG = "SettingsViewModel"
     }
 }

@@ -124,6 +124,15 @@ fun EmailTextField(
             contentDescription = null
         )
     },
+    keyboardActions: KeyboardActions = KeyboardActions(
+        onNext = {
+            focusManager.moveFocus(FocusDirection.Down)
+        }
+    ),
+    keyboardOptions: KeyboardOptions = KeyboardOptions(
+        keyboardType = KeyboardType.Email,
+        imeAction = ImeAction.Next
+    ),
     focusManager: FocusManager
 ) {
     AuthTextField(
@@ -132,15 +141,8 @@ fun EmailTextField(
         label = stringResource(R.string.email_address),
         isError = isError,
         leadingIcon = leadingIcon,
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Email,
-            imeAction = ImeAction.Next
-        ),
-        keyboardActions = KeyboardActions(
-            onNext = {
-                focusManager.moveFocus(FocusDirection.Down)
-            }
-        )
+        keyboardActions = keyboardActions,
+        keyboardOptions = keyboardOptions
     )
 
     AuthHelperText(

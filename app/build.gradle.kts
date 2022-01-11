@@ -13,8 +13,6 @@ allprojects {
         maven("https://maven.google.com")
         gradlePluginPortal()
     }
-
-
 }
 
 android {
@@ -44,10 +42,6 @@ android {
 
     }
 
-
-//    kapt {
-//        correctErrorTypes = true
-//    }
 
     packagingOptions {
         resources {
@@ -95,13 +89,12 @@ android {
 
         }
     }
-
 }
-
 
 
 dependencies {
 
+    //Coil
     with(Dependencies.Coil) {
         implementation(coil)
     }

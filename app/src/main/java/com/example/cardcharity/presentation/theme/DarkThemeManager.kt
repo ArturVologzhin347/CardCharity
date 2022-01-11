@@ -22,8 +22,7 @@ class DarkThemeManager @Inject constructor(private val preferences: Preferences)
 
     fun setNewTheme(theme: Theme) {
         if (theme == Theme.AUTO) requireAndroidQ()
-        Timber.e("Current theme - ${this.theme.value}")
-        Timber.e("New theme - ${theme.name}")
+        Timber.i("Current theme - ${this.theme.value}\nNew theme - ${theme.name}")
 
         _theme.value = theme
         preferences.theme = theme

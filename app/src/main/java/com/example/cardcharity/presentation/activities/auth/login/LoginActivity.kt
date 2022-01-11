@@ -7,22 +7,20 @@ import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.core.os.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.example.cardcharity.presentation.activities.auth.signup.SignupActivity
 import com.example.cardcharity.presentation.activities.main.MainActivity
-import com.example.cardcharity.presentation.activities.password.forgot.ForgotActivity
-import com.example.cardcharity.presentation.base.BaseActivity
+import com.example.cardcharity.presentation.activities.reset.ResetActivity
+import com.example.cardcharity.presentation.base.mvi.MviActivity
 import com.example.cardcharity.utils.extensions.launchWhenStarted
 import com.example.cardcharity.utils.extensions.openActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 
-class LoginActivity : BaseActivity() {
-    private val viewModel: LoginViewModel by viewModels()
+class LoginActivity : MviActivity<LoginViewState, LoginEvent, LoginViewModel>() {
+    override val viewModel: LoginViewModel by viewModels()
 
     private val googleSignInClient: GoogleSignInClient by lazy(LazyThreadSafetyMode.NONE) {
         GoogleSignIn.getClient(this, viewModel.gso)
@@ -32,36 +30,27 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel.viewState.onEach { state ->
-            if (state is Success) {
-                reduceEvent(go())
-            }
+            if (state is Success) reduceEvent(go())
         }.launchWhenStarted(lifecycleScope)
     }
 
     @Composable
-    override fun Screen() {
-        val viewState = viewModel.viewState.collectAsState()
-
+    override fun Screen(reduce: (event: LoginEvent) -> Unit, viewState: LoginViewState) {
         LoginScreen(
-            reduce = { event -> reduceEvent(event) },
-            viewState = viewState.value
+            reduce = reduce,
+            viewState = viewState
         )
     }
 
-    private fun reduceEvent(event: LoginEvent) {
-        Timber.d("Reducing event: $event")
-
-        if (viewModel.state == Load) {
-            Timber.i("Cannot reduce event $event because state is Load")
-            return
-        }
+    override fun reduceEvent(event: LoginEvent) {
+        if (viewModel.state == Load) return
 
         when (event) {
             is ForgotPassword -> forgotPasswordEvent(event.email)
             LoginWithGoogle -> loginWithGoogleEvent()
             Signup -> signup()
             Go -> goEvent()
-            else -> viewModel.reduceEvent(event)
+            else -> super.reduceEvent(event)
         }
     }
 
@@ -71,7 +60,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun forgotPasswordEvent(email: String) {
-        ForgotActivity.start(this, email)
+        ResetActivity.start(this, email)
     }
 
     private fun signup() {
@@ -100,9 +89,7 @@ class LoginActivity : BaseActivity() {
 
     companion object {
         private val handler = Handler(Looper.getMainLooper())
-
         private const val DELAY_AFTER_GO = 200L
     }
+
 }
-
-
