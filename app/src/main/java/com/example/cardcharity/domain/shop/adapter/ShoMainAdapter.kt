@@ -8,7 +8,7 @@ import com.example.cardcharity.utils.extensions.firstInUppercase
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class ShopStickyLabelsAdapter : DataAdapter<List<Shop>, List<ShopListModel>> {
+class ShoMainAdapter : DataAdapter<List<Shop>, List<ShopListModel>> {
     override suspend fun format(input: List<Shop>): List<ShopListModel> = suspendCoroutine {
         if (input.isEmpty()) {
             it.resume(emptyList())
@@ -30,6 +30,7 @@ class ShopStickyLabelsAdapter : DataAdapter<List<Shop>, List<ShopListModel>> {
                 add(ShopListModel.ShopModel(shop = shop))
             }
         }
+
         it.resume(shops)
     }
 }

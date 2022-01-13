@@ -32,17 +32,15 @@ class NetworkFactory @Inject constructor(private val retrofit: Retrofit) {
             call.enqueue(object : Callback<T> {
                 override fun onResponse(call: Call<T>, response: Response<T>) {
                     CoroutineScope(Dispatchers.IO).launch {
-
                         if (response.isSuccessful) {
                             val body = checkNotNull(response.body())
                             response(Event.success(body))
-                            return@launch
+                        } else {
+                            val error = response.errorSuspending()
+                            val exception = Exception(error)
+                            response(Event.fail(exception))
+                            Timber.w(error)
                         }
-
-                        val error = response.errorSuspending()
-                        val exception = Exception(error)
-                        response(Event.fail(exception))
-                        Timber.w(error)
                     }
                 }
 

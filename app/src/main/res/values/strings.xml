@@ -8,14 +8,21 @@
 
 
     <string name="select_shop">Select shop:</string>
-    <string name="search">Search</string>
 
     <string name="ok">OK</string>
     <string name="or">Or</string>
     <string name="back">Back</string>
     <string name="refresh">Refresh</string>
+    <string name="search">Search</string>
+    <string name="error">Error</string>
+
     <string name="send_mail">Send mail</string>
     <string name="mail_was_sent_to">The mail was sent to</string>
+
+
+    <string name="not_found">Not found</string>
+    <string name="the_shop_with_name">The shop with the name</string>
+    <string name="was_not_found">was not found.</string>
 
 
 

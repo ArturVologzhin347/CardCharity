@@ -39,6 +39,7 @@ import com.example.cardcharity.utils.checkOrNull
 import com.example.cardcharity.utils.extensions.api
 import com.example.cardcharity.utils.extensions.getImageUrlCodeImage
 import com.example.cardcharity.utils.extensions.getImageUrlLogo
+import com.example.cardcharity.utils.extensions.getNavigationBarHeight
 import timber.log.Timber
 
 /*
@@ -52,9 +53,11 @@ import timber.log.Timber
 fun MainBottomSheet(
     shop: Shop?,
     user: User?,
-    onClose: () -> Unit
+    onClose: () -> Unit,
+    enableSystemBarAdaptive: Boolean = true
 ) {
-    checkOrNull(shop != null && user != null) ?: run {
+
+    if (shop == null || user == null) {
         VerticalSpace(1.dp)
         return
     }
@@ -85,7 +88,11 @@ fun MainBottomSheet(
                     contentScale = ContentScale.FillBounds,
                     contentDescription = null,
                     modifier = Modifier
-                        .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
+                        .padding(
+                            start = 16.dp,
+                            top = 16.dp,
+                            bottom = 16.dp
+                        )
                         .size(48.dp)
                 )
 
@@ -126,17 +133,16 @@ fun MainBottomSheet(
                         ),
                         builder = {
                             crossfade(true)
-                            this.parameters(Parameters())
                             memoryCachePolicy(CachePolicy.DISABLED)
                             diskCachePolicy(CachePolicy.DISABLED)
                         }
                     )
 
-                    if(painter.state is ImagePainter.State.Error) {
-                        //TODO
+                    if (painter.state is ImagePainter.State.Error) {
                         Text(
-                            text = "Error",
+                            text = stringResource(R.string.error),
                             color = Color.Black,
+                            fontSize = 18.sp,
                             modifier = Modifier.align(Alignment.Center)
                         )
                     }
@@ -161,6 +167,11 @@ fun MainBottomSheet(
             )
 
             VerticalSpace(56.dp)
+
+
+            if(enableSystemBarAdaptive) {
+                VerticalSpace(context.getNavigationBarHeight().dp)
+            }
         }
     }
 }

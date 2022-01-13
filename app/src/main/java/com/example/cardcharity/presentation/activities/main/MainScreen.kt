@@ -2,13 +2,13 @@ package com.example.cardcharity.presentation.activities.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -40,13 +40,15 @@ fun MainScreen(
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    val selectedShop = remember { mutableStateOf<Shop?>(null) }
+    var selectedShop by remember { mutableStateOf<Shop?>(null) }
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
+        sheetShape = RectangleShape,
+        sheetElevation = 16.dp,
         sheetContent = {
             MainBottomSheet(
-                shop = selectedShop.value,
+                shop = selectedShop,
                 user = user,
                 onClose = {
                     scope.launch {
@@ -54,9 +56,9 @@ fun MainScreen(
                     }
                 }
             )
+
         },
         scrimColor = Color.Black.copy(alpha = 0.42F),
-
         content = {
             MainContent(
                 reduce = reduce,
@@ -64,7 +66,7 @@ fun MainScreen(
                 viewState = viewState,
                 openSheet = { shop ->
                     scope.launch {
-                        selectedShop.value = shop
+                        selectedShop = shop
                         sheetState.animateTo(ModalBottomSheetValue.Expanded)
                     }
                 },
@@ -103,10 +105,7 @@ fun MainContent(
         frontLayerElevation = 0.dp,
         backLayerBackgroundColor = MaterialTheme.colors.background,
         frontLayerBackgroundColor = MaterialTheme.colors.surface,
-        frontLayerShape = MaterialTheme.shapes.medium.copy(
-            bottomStart = CornerSize(0),
-            bottomEnd = CornerSize(0)
-        ),
+        frontLayerShape = RectangleShape,
 
         backLayerContent = {
             MainBackLayerContent(
@@ -146,12 +145,8 @@ fun MainBackLayerContent(
             onSearchClick = { reduce(search()) }
         )
         VerticalSpace(8.dp)
-        //SelectShopLabel()
 
-
-        VerticalSpace(56.dp)
-
-        //TODO
+        SelectShopLabel()
 
     }
 }
@@ -162,10 +157,11 @@ fun SelectShopLabel() {
     Text(
         text = stringResource(R.string.select_shop),
         fontSize = 32.sp,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Light,
         color = MaterialTheme.colors.onBackground,
         modifier = Modifier
             .padding(horizontal = 16.dp)
+            .padding(bottom = 16.dp, top = 16.dp)
     )
 }
 
@@ -217,14 +213,14 @@ fun MainFrontLayerContent(
         }
 
         Load -> MainLoad()
-        NoNetwork -> MailFailNetworkConnection(refresh)
+        NoNetwork -> MainFailNoNetwork(refresh)
         NoItems -> MainFailNoItems(refresh)
         Unknown -> MainFailUnknown(refresh)
     }
 }
 
 @Composable
-fun MailFailNetworkConnection(onRefresh: () -> Unit) {
+fun MainFailNoNetwork(onRefresh: () -> Unit) {
     Fail(
         painter = painterResource(R.drawable.ic_network_off_24),
         label = stringResource(R.string.error_network),
@@ -322,7 +318,6 @@ fun MainLoad() {
             color = MaterialTheme.colors.primary,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(8.dp)
         )
     }
 }

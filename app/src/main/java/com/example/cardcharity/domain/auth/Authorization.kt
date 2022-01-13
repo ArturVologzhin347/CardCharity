@@ -33,14 +33,11 @@ class Authorization @Inject constructor() {
     private val firebaseUser
         get() = firebaseAuth.currentUser
 
-
     init {
         firebaseUser?.let {
             _user.value = User(it)
         }
     }
-
-
 
     suspend fun sendForgotPasswordMail(
         email: String,

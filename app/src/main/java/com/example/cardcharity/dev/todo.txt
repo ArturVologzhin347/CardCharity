@@ -1,26 +1,22 @@
-- fix cache
-- clear favorite shops on sign out
-- search
+- highlight barcode
 - about activity (start)
 - welcome activity
--
-
-
 - avatar placeholder
 
 
 
 
-
 - greetings in splash activity
-- Search activity (нахождение по принципу search in name)
-- last shops
-
 
 
 - lorem ipsum in signup screen
-- divider in login activity. set normal size
-- google button design
 
 
+- design police
+- code refactor
+- utils, docs, etc
 
+
+Design police:
+- labels in reset password, main, sign up
+- app icon

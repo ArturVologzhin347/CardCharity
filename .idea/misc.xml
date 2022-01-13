@@ -71,6 +71,32 @@
         <entry key="../../../../layout/compose-model-1641929244675.xml" value="0.13440635451505017" />
         <entry key="../../../../layout/compose-model-1641930752988.xml" value="0.21574074074074073" />
         <entry key="../../../../layout/compose-model-1641930899924.xml" value="0.21574074074074073" />
+        <entry key="../../../../layout/compose-model-1641962281905.xml" value="0.21574074074074073" />
+        <entry key="../../../../layout/compose-model-1641995715865.xml" value="0.1346153846153846" />
+        <entry key="../../../../layout/compose-model-1641996143894.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1641996511828.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1641997888495.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1641998442656.xml" value="0.13440635451505017" />
+        <entry key="../../../../layout/compose-model-1641998455998.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1641998815186.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1642001456904.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1642001610206.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1642006788949.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1642006793281.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1642008296717.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1642010261175.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1642010322529.xml" value="0.13440635451505017" />
+        <entry key="../../../../layout/compose-model-1642011289244.xml" value="0.21203703703703702" />
+        <entry key="../../../../layout/compose-model-1642012142816.xml" value="0.13440635451505017" />
+        <entry key="../../../../layout/compose-model-1642022824386.xml" value="0.20925925925925926" />
+        <entry key="../../../../layout/compose-model-1642023132476.xml" value="0.20925925925925926" />
+        <entry key="../../../../layout/compose-model-1642023262482.xml" value="0.13440635451505017" />
+        <entry key="../../../../layout/compose-model-1642024069484.xml" value="0.20925925925925926" />
+        <entry key="../../../../layout/compose-model-1642024730349.xml" value="0.20925925925925926" />
+        <entry key="../../../../layout/compose-model-1642024813256.xml" value="0.2687608713979353" />
+        <entry key="../../../../layout/compose-model-1642025090903.xml" value="0.20925925925925926" />
+        <entry key="../../../../layout/compose-model-1642025113247.xml" value="0.20925925925925926" />
+        <entry key="../../../../layout/compose-model-1642051417641.xml" value="0.20925925925925926" />
         <entry key="../../../../layout/custom_preview.xml" value="10.0" />
         <entry key="app/src/main/res/drawable/circle_placeholder.xml" value="0.21574074074074073" />
         <entry key="app/src/main/res/drawable/ic_.xml" value="0.2351851851851852" />
@@ -97,6 +123,8 @@
         <entry key="app/src/main/res/menu/main_popup.xml" value="0.22314814814814815" />
         <entry key="app/src/main/res/menu/main_toolbar.xml" value="0.17314814814814813" />
         <entry key="app/src/main/res/menu/toolbar_main.xml" value="0.22314814814814815" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.13647830474268416" />
       </map>
     </option>
@@ -106,7 +134,7 @@
       <item index="0" class="java.lang.String" itemvalue="com.bumptech.glide.annotation.GlideModule" />
     </list>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -2,9 +2,11 @@ package com.example.cardcharity.presentation.activities.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
@@ -33,9 +35,11 @@ class MainActivity : MviActivity<MainViewState, MainEvent, MainViewModel>() {
     @Composable
     override fun Screen(reduce: (event: MainEvent) -> Unit, viewState: MainViewState) {
         val user = authorization.user.collectAsState()
+        val isLight = MaterialTheme.colors.isLight
+
         rememberSystemUiController().apply {
             SideEffect {
-                setStatusBarColor(Color.Transparent)
+                setStatusBarColor(Color.Transparent, isLight)
             }
         }
 
@@ -57,6 +61,7 @@ class MainActivity : MviActivity<MainViewState, MainEvent, MainViewModel>() {
     private fun settingsEvent() {
         openActivity(this, SettingsActivity::class)
     }
+
 
     private fun searchEvent() {
         openActivity(this, SearchActivity::class)

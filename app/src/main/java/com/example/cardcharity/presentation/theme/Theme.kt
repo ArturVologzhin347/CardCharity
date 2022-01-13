@@ -59,11 +59,10 @@ fun CardCharityTheme(
 
     SideEffect {
         with(systemUiController) {
-            setStatusBarColor(color = colors.background)
-            setNavigationBarColor(color = colors.surface)
+            setStatusBarColor(color = colors.background, darkIcons = darkTheme)
+            setNavigationBarColor(color = colors.surface, darkIcons = darkTheme)
         }
     }
-
 
     val imageLoader = ImageLoader
         .Builder(context)
@@ -99,4 +98,3 @@ fun PreviewTheme(
         content = content
     )
 }
-

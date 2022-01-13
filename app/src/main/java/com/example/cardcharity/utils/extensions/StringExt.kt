@@ -43,6 +43,14 @@ fun String.toAbbreviation(maxLength: Int): String {
     return this.replace("\\B.|\\P{L}".toRegex(), "").uppercase().cut(maxLength)
 }
 
+fun String.firstReplacedSplit(
+    value: String,
+    delimiter: String = "#",
+    ignoreCase: Boolean = true
+): List<String> {
+    return replaceFirst(value, delimiter, ignoreCase).split(delimiter)
+}
+
 fun CharSequence.isNotEmail(): Boolean {
     return !isEmail()
 }

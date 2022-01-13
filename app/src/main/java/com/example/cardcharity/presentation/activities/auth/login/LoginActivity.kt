@@ -91,5 +91,4 @@ class LoginActivity : MviActivity<LoginViewState, LoginEvent, LoginViewModel>() 
         private val handler = Handler(Looper.getMainLooper())
         private const val DELAY_AFTER_GO = 200L
     }
-
 }

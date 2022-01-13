@@ -1,7 +1,5 @@
 package com.example.cardcharity.presentation.ui.elements
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,9 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -24,17 +20,11 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
-import com.example.cardcharity.R
 import com.example.cardcharity.presentation.theme.PreviewTheme
 import com.example.cardcharity.repository.model.User
 import com.example.cardcharity.utils.extensions.abbreviation
-import com.example.cardcharity.utils.extensions.drawable
-import com.example.cardcharity.utils.extensions.intColor
-import com.example.cardcharity.utils.extensions.setColor
-import timber.log.Timber
 
 val previewUser = User(
     uid = "",

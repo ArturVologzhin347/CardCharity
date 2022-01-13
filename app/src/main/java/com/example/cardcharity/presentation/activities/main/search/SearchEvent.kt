@@ -1,6 +1,8 @@
 package com.example.cardcharity.presentation.activities.main.search
 
-sealed class SearchEvent
+import com.example.cardcharity.presentation.base.mvi.MviEvent
+
+sealed class SearchEvent: MviEvent
 
 object Finish: SearchEvent()
 

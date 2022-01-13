@@ -21,7 +21,7 @@ abstract class MviActivity<VS : MviViewState, E : MviEvent, VM : MviViewModel<VS
     @Composable
     abstract fun Screen(reduce: (event: E) -> Unit, viewState: VS)
 
-    private fun reduce(event: E) {
+    protected fun reduce(event: E) {
         Timber.d("Reducing event: $event")
         reduceEvent(event)
     }

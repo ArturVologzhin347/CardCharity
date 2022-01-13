@@ -25,7 +25,6 @@ class ResetActivity : MviActivity<ResetViewState, ResetEvent, ResetViewModel>() 
             Finish -> this.finish()
             else -> viewModel.reduceEvent(event)
         }
-
     }
 
     companion object {

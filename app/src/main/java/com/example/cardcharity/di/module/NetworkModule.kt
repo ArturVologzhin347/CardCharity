@@ -9,12 +9,9 @@ import javax.inject.Singleton
 @Module
 object NetworkModule {
 
-
     @Provides
     @Singleton
     fun provideRetrofit(retrofit: Retrofit): NetworkFactory {
         return NetworkFactory(retrofit)
     }
-
-
 }

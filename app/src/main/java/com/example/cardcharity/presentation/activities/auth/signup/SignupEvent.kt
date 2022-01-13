@@ -24,5 +24,3 @@ fun signup(
     password: String,
     confirm: String
 ) = Signup(email, password, confirm)
-
-

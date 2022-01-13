@@ -3,7 +3,7 @@ package com.example.cardcharity.presentation.activities.main
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.example.cardcharity.domain.common.Event
-import com.example.cardcharity.domain.shop.adapter.ShopStickyLabelsAdapter
+import com.example.cardcharity.domain.shop.adapter.ShoMainAdapter
 import com.example.cardcharity.presentation.base.mvi.MviViewModel
 import com.example.cardcharity.repository.model.Shop
 import com.example.cardcharity.repository.network.exception.NoNetworkException
@@ -19,7 +19,7 @@ class MainViewModel(application: Application) :
     private val _rawShops = MutableStateFlow<List<Shop>?>(null)
     val rawShops = _rawShops.asStateFlow()
 
-    private val defaultShopsAdapter = ShopStickyLabelsAdapter()
+    private val defaultShopsAdapter = ShoMainAdapter()
 
     fun fetchShops() = viewModelScope.launch(Dispatchers.IO) {
         with(api) {

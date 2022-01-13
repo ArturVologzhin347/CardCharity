@@ -12,6 +12,8 @@ object Default : LoginViewState()
 
 object Success : LoginViewState()
 
+object Load : LoginViewState()
+
 sealed class Fail(val locale: Locale, val exception: UiException) : LoginViewState()
 
 object EmailEmpty : Fail(Locale.EMAIL, EmailEmptyException)
@@ -36,11 +38,13 @@ enum class Locale {
     PASSWORD
 }
 
-object Load : LoginViewState()
+
 
 fun default() = Default
 
 fun success() = Success
+
+fun load() = Load
 
 fun failEmailEmpty() = EmailEmpty
 
@@ -55,9 +59,6 @@ fun failNoNetworkConnection() = NoNetworkConnection
 fun failGoogleAuth() = GoogleAuth
 
 fun failUnknown() = Unknown
-
-fun load() = Load
-
 
 data class LoginFailHandled(val fail: Fail) : Exception()
 
@@ -93,5 +94,3 @@ fun LoginViewState.commonFailMessageOrNull(): String? {
 
     return null
 }
-
-

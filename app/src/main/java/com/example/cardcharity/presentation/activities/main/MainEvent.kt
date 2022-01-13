@@ -10,7 +10,6 @@ object Refresh : MainEvent()
 
 object Search : MainEvent()
 
-
 fun settings() = Settings
 
 fun refresh() = Refresh

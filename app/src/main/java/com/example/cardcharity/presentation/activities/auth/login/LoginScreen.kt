@@ -112,7 +112,10 @@ fun LoginScreen(
                 onClick = { reduce(signup()) }
             )
 
-            Divider(modifier = Modifier.padding(horizontal = 128.dp))
+            Divider(modifier = Modifier
+                .width(56.dp)
+                .align(Alignment.CenterHorizontally)
+            )
 
             VerticalSpace(56.dp)
 
