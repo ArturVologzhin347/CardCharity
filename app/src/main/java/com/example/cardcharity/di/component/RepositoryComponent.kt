@@ -7,6 +7,7 @@ import com.example.cardcharity.presentation.activities.auth.signup.SignupViewMod
 import com.example.cardcharity.presentation.activities.main.MainViewModel
 import com.example.cardcharity.presentation.activities.settings.SettingsViewModel
 import com.example.cardcharity.presentation.activities.splash.SplashViewModel
+import com.example.cardcharity.presentation.activities.welcome.WelcomeViewModel
 import com.example.cardcharity.presentation.base.BaseActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -26,6 +27,8 @@ import javax.inject.Singleton
 interface RepositoryComponent {
     fun inject(app: App)
     fun inject(activity: BaseActivity)
+    fun inject(vm: MainViewModel)
     fun inject(vm: SplashViewModel)
     fun inject(vm: SettingsViewModel)
+    fun inject(vm: WelcomeViewModel)
 }

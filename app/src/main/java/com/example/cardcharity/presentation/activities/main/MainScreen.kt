@@ -30,6 +30,7 @@ import com.example.cardcharity.repository.model.User
 import com.example.cardcharity.utils.extensions.getStatusBarHeight
 import com.example.cardcharity.utils.extensions.noRippleClickable
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -41,6 +42,10 @@ fun MainScreen(
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     var selectedShop by remember { mutableStateOf<Shop?>(null) }
+
+    LaunchedEffect(sheetState.isVisible) {
+        reduce(highlight(sheetState.isVisible))
+    }
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -69,11 +74,6 @@ fun MainScreen(
                         selectedShop = shop
                         sheetState.animateTo(ModalBottomSheetValue.Expanded)
                     }
-                },
-                closeSheet = {
-                    scope.launch {
-                        sheetState.hide()
-                    }
                 }
             )
         },
@@ -88,17 +88,14 @@ fun MainContent(
     viewState: MainViewState,
     user: User?,
     reduce: (event: MainEvent) -> Unit,
-    openSheet: (shop: Shop) -> Unit,
-    closeSheet: () -> Unit
+    openSheet: (shop: Shop) -> Unit
 ) {
-    val context = LocalContext.current
     val backdropState = rememberBackdropScaffoldState(initialValue = BackdropValue.Revealed)
 
-    val statusBarHeight = context.getStatusBarHeight()
 
     BackdropScaffold(
         scaffoldState = backdropState,
-        peekHeight = (56 + statusBarHeight).dp,
+        peekHeight = 56.dp,
         persistentAppBar = true,
         frontLayerScrimColor = Color.Unspecified,
         appBar = {},
@@ -109,8 +106,6 @@ fun MainContent(
 
         backLayerContent = {
             MainBackLayerContent(
-                viewState = viewState,
-                statusBarHeight = statusBarHeight.dp,
                 user = user,
                 reduce = reduce
             )
@@ -128,17 +123,12 @@ fun MainContent(
     )
 }
 
-
 @Composable
 fun MainBackLayerContent(
-    viewState: MainViewState,
     user: User?,
-    statusBarHeight: Dp,
     reduce: (event: MainEvent) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        VerticalSpace(statusBarHeight)
-
         MainTopBar(
             user = user,
             onAvatarClick = { reduce(settings()) },

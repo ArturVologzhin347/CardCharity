@@ -29,7 +29,7 @@ import com.example.cardcharity.utils.extensions.abbreviation
 val previewUser = User(
     uid = "",
     email = "test@gmail.com",
-    name = "Artur Vologzhin",
+    name = "Name Lastname",
     photoUrl = null,
     createdAt = System.currentTimeMillis()
 )
@@ -70,16 +70,11 @@ private fun LoadableAvatarImage(
     size: Dp,
     modifier: Modifier
 ) {
-    /*
-    TODO placeholder
-
-     */
     val painter = rememberImagePainter(
         data = photoUrl,
         builder = {
             crossfade(true)
             transformations(CircleCropTransformation())
-
         }
     )
 
@@ -118,7 +113,6 @@ private fun WritableAvatarImage(
         )
     }
 }
-
 
 @Preview
 @Composable

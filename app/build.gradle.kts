@@ -32,16 +32,13 @@ android {
         }
     }
 
-
     buildFeatures {
         compose = true
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = Dependencies.Compose.compose_version
-
     }
-
 
     packagingOptions {
         resources {
@@ -86,7 +83,6 @@ android {
             kotlinOptions.freeCompilerArgs += listOf(
                 "-Xopt-in=kotlin.RequiresOptIn"
             )
-
         }
     }
 }
@@ -171,5 +167,4 @@ dependencies {
         implementation(junitExt)
         implementation(espresso)
     }
-
 }

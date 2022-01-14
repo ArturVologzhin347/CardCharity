@@ -56,8 +56,7 @@ fun SettingsScreen(
         backLayerContent = {
             SettingsBackLayerContent(
                 reduce = reduce,
-                user = user,
-                viewState = viewState
+                user = user
             )
         },
         frontLayerContent = {
@@ -137,18 +136,16 @@ fun SettingsFrontLayerContent(
             )
         )
 
-        VerticalSpace(16.dp)
-
-        SettingItemsContainer(
-            header = {},
-            items = listOf {
-                SettingAboutApp(
-                    onClick = {
-                        reduce(aboutApp())
-                    }
-                )
-            }
-        )
+//        SettingItemsContainer(
+//            header = {},
+//            items = listOf {
+//                SettingAboutApp(
+//                    onClick = {
+//                        reduce(aboutApp())
+//                    }
+//                )
+//            }
+//        )
 
         AppVersion()
     }
@@ -435,8 +432,7 @@ fun SettingIcon(painter: Painter) {
 @Composable
 fun SettingsBackLayerContent(
     reduce: (event: SettingsEvent) -> Unit,
-    user: User?,
-    viewState: SettingsViewState
+    user: User?
 ) {
     Column(
         verticalArrangement = Arrangement.Top,

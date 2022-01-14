@@ -10,20 +10,23 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.cardcharity.di.Dagger2
 import com.example.cardcharity.presentation.activities.main.search.SearchActivity
 import com.example.cardcharity.presentation.activities.settings.SettingsActivity
 import com.example.cardcharity.presentation.base.mvi.MviActivity
-import com.example.cardcharity.utils.extensions.authorization
-import com.example.cardcharity.utils.extensions.launchWhenStarted
-import com.example.cardcharity.utils.extensions.openActivity
+import com.example.cardcharity.repository.preferences.Preferences
+import com.example.cardcharity.utils.extensions.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
+import kotlin.math.max
 
 class MainActivity : MviActivity<MainViewState, MainEvent, MainViewModel>() {
     override val viewModel: MainViewModel by viewModels()
+    private var previousScreenBrightness = 0F
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        previousScreenBrightness = window.getBrightness()
         viewModel.fetchShops()
         super.onCreate(savedInstanceState)
 
@@ -35,13 +38,6 @@ class MainActivity : MviActivity<MainViewState, MainEvent, MainViewModel>() {
     @Composable
     override fun Screen(reduce: (event: MainEvent) -> Unit, viewState: MainViewState) {
         val user = authorization.user.collectAsState()
-        val isLight = MaterialTheme.colors.isLight
-
-        rememberSystemUiController().apply {
-            SideEffect {
-                setStatusBarColor(Color.Transparent, isLight)
-            }
-        }
 
         MainScreen(
             reduce = reduce,
@@ -54,6 +50,7 @@ class MainActivity : MviActivity<MainViewState, MainEvent, MainViewModel>() {
         when (event) {
             Settings -> settingsEvent()
             Search -> searchEvent()
+            is Highlight -> highlightEvent(event)
             else -> super.reduceEvent(event)
         }
     }
@@ -65,5 +62,33 @@ class MainActivity : MviActivity<MainViewState, MainEvent, MainViewModel>() {
 
     private fun searchEvent() {
         openActivity(this, SearchActivity::class)
+    }
+
+    private fun highlightEvent(event: Highlight) {
+        if (event.enable) {
+            maxBrightnessEvent()
+        } else {
+            setPreviousBrightness()
+        }
+    }
+
+    private fun maxBrightnessEvent() {
+        if (viewModel.preferences.highlightCode) {
+            with(window) {
+                previousScreenBrightness = getBrightness()
+                setScreenBrightness(MAX_BRIGHTNESS)
+            }
+        }
+    }
+
+    private fun setPreviousBrightness() {
+        if (viewModel.preferences.highlightCode) {
+            window.setScreenBrightness(previousScreenBrightness)
+
+        }
+    }
+
+    companion object {
+        private const val MAX_BRIGHTNESS = 1f
     }
 }

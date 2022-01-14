@@ -4,12 +4,22 @@ import android.content.Context
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.util.DisplayMetrics
+import android.view.Window
+import androidx.annotation.FloatRange
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import kotlin.math.ceil
+
+fun Window.setScreenBrightness(@FloatRange(from = 0.0, to = 1.0) brightness: Float) {
+    this.attributes = attributes.apply { screenBrightness = brightness }
+}
+
+fun Window.getBrightness(): Float {
+    return this.attributes.screenBrightness
+}
 
 fun Context.getStatusBarHeight(): Int =
     getSystemDimen("status_bar_height")

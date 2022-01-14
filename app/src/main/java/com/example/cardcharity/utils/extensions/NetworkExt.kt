@@ -17,7 +17,6 @@ import java.security.cert.X509Certificate
 import java.util.*
 import javax.net.ssl.*
 
-
 @Suppress("DEPRECATION")
 fun isNetworkAvailable(context: Context): Boolean {
     (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).apply {

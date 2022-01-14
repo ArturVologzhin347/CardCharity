@@ -8,7 +8,7 @@ object Finish : SettingsEvent()
 
 object SignOut : SettingsEvent()
 
-object AboutApp : SettingsEvent()
+//object AboutApp : SettingsEvent()
 
 object ResetPassword : SettingsEvent()
 
@@ -23,7 +23,7 @@ fun finish() = Finish
 
 fun signOut() = SignOut
 
-fun aboutApp() = AboutApp
+//fun aboutApp() = AboutApp
 
 fun resetPassword() = ResetPassword
 

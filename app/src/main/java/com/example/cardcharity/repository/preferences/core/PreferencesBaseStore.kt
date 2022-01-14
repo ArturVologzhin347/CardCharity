@@ -90,4 +90,3 @@ abstract class PreferencesBaseStore(storeName: String, preferences: SharedPrefer
         } as T
     }
 }
-

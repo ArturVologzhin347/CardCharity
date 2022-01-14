@@ -13,10 +13,10 @@ class Api @Inject constructor(private val network: NetworkFactory) {
     val url: HttpUrl = network.url
     val shops by network.lazyApi(ShopApi::class)
 
-    suspend fun <T : Any> request(
-        call: Call<T>,
-        flow: MutableStateFlow<Event<T>?>
-    ) = request(call) { event -> flow.value = event }
+//    suspend fun <T : Any> request(
+//        call: Call<T>,
+//        flow: MutableStateFlow<Event<T>?>
+//    ) = request(call) { event -> flow.value = event }
 
     suspend fun <T : Any> request(
         call: Call<T>,

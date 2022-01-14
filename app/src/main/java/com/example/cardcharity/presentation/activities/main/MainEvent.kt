@@ -10,11 +10,15 @@ object Refresh : MainEvent()
 
 object Search : MainEvent()
 
+data class Highlight(val enable: Boolean) : MainEvent()
+
 fun settings() = Settings
 
 fun refresh() = Refresh
 
 fun search() = Search
+
+fun highlight(enable: Boolean) = Highlight(enable)
 
 
 

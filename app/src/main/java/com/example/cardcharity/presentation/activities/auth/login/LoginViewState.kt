@@ -38,8 +38,6 @@ enum class Locale {
     PASSWORD
 }
 
-
-
 fun default() = Default
 
 fun success() = Success

@@ -29,7 +29,6 @@ import com.example.cardcharity.presentation.theme.surface8Primary
 const val IC_VISIBILITY_ON = R.drawable.ic_visibility_24
 const val IC_VISIBILITY_OFF = R.drawable.ic_visibility_off_24
 
-
 @Composable
 fun ConfirmPasswordTextField(
     password: String,
@@ -224,8 +223,7 @@ fun AdvancedTextField(
         label = { TextFieldLabel(label) },
         singleLine = true,
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            backgroundColor = MaterialTheme.colors.surface,
-            //TODO
+            backgroundColor = MaterialTheme.colors.surface
         ),
         isError = isError,
         placeholder = placeholder,

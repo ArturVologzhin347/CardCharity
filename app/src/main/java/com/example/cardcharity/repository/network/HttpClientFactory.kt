@@ -13,7 +13,6 @@ import javax.inject.Inject
 
 class HttpClientFactory @Inject constructor(private val context: Context) {
 
-    //TODO
     fun buildHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().setDebugMode(BuildConfig.DEBUG_MODE)
         val cacheInterceptor = CacheInterceptor(context)
@@ -26,7 +25,6 @@ class HttpClientFactory @Inject constructor(private val context: Context) {
             toUnsafe()
         }.build()
     }
-
 
     companion object {
         private const val RESPONSES_CACHE_SIZE = 10L * 1024L * 1024L // 10 MiB

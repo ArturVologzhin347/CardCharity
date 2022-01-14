@@ -2,7 +2,7 @@ package com.example.cardcharity.presentation.activities.auth.signup
 
 import com.example.cardcharity.presentation.base.mvi.MviEvent
 
-sealed class SignupEvent: MviEvent
+sealed class SignupEvent : MviEvent
 
 object Back : SignupEvent()
 

@@ -9,7 +9,7 @@ sealed class SettingsViewState(
     val highlightCode: Boolean
 ) : MviViewState
 
-object Initial: SettingsViewState(
+object Initial : SettingsViewState(
     nightMode = false,
     syncWithSystemTheme = true,
     highlightCode = true

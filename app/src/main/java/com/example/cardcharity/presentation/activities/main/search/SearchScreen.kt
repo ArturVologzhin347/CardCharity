@@ -80,8 +80,7 @@ fun SearchScreen(
                         scope.launch {
                             sheetState.hide()
                         }
-                    },
-                    enableSystemBarAdaptive = false
+                    }
                 )
             },
         ) {

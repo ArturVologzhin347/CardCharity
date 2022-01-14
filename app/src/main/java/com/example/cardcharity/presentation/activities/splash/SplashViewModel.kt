@@ -35,11 +35,11 @@ class SplashViewModel(application: Application) : BaseViewModel(application) {
 
 
     private fun getDestination(user: User?): KClass<*> {
-        if(!preferences.hasVisited) {
+        if (!preferences.hasVisited) {
             return WelcomeActivity::class
         }
 
-        if(user.isAuthorized) {
+        if (user.isAuthorized) {
             return MainActivity::class
         }
 

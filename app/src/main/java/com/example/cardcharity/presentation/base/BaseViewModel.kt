@@ -35,5 +35,4 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     }
 
     protected open fun inject(dagger: Dagger2) {}
-
 }

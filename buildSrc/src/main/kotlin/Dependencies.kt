@@ -15,11 +15,6 @@ object Dependencies {
         const val core = "androidx.core:core-ktx:$kotlin_version"
     }
 
-    /*
-    implementation("androidx.compose.material:material-icons-core:1.0.5")
-    implementation("androidx.compose.material:material-icons-extended:1.0.5")
-      implementation("androidx.compose.foundation:foundation:1.0.5")
-     */
     object Compose {
         const val compose_version = "1.0.5"
 

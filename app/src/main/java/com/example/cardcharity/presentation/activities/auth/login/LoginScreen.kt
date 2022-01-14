@@ -43,7 +43,6 @@ fun LoginScreen(
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
-    //Common errors handling
     viewState.commonFailMessageOrNull()?.let { errorMessage ->
         Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
     }
@@ -176,7 +175,6 @@ fun SignupButton(onClick: () -> Unit) {
             modifier = Modifier
                 .padding(all = 24.dp)
                 .align(Alignment.Center)
-
         )
     }
 }
@@ -191,7 +189,6 @@ fun GoogleButton(onClick: () -> Unit) {
             .padding(bottom = 24.dp)
             .fillMaxWidth()
     ) {
-
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,

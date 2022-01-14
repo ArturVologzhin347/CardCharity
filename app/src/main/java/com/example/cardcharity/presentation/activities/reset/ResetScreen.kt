@@ -35,12 +35,13 @@ fun ResetPasswordScreen(
     initialEmail: String = ""
 
 ) {
-    var email by rememberSaveable { mutableStateOf(initialEmail) }
-
+    val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
     val dialogIsOpen = remember { mutableStateOf(false) }
+    var email by rememberSaveable { mutableStateOf(initialEmail) }
+
 
     ResetPasswordDialog(
         isOpen = dialogIsOpen,
@@ -54,8 +55,11 @@ fun ResetPasswordScreen(
         }
     }
 
-    viewState.commonFailMessageOrNull()?.let {
-        Toast.makeText(LocalContext.current, it, Toast.LENGTH_LONG).show()
+    val commonMessage = viewState.commonFailMessageOrNull()
+    LaunchedEffect(viewState) {
+        if (commonMessage != null) {
+            Toast.makeText(context, commonMessage, Toast.LENGTH_SHORT).show()
+        }
     }
 
     Surface(
@@ -67,8 +71,7 @@ fun ResetPasswordScreen(
         ) {
             BackButton(onClick = { reduce(finish()) })
             NestedResizeColumn {
-                ResetPasswordLabel()
-
+                VerticalSpace(56.dp)
                 EmailTextField(
                     email = email,
                     onEmailChange = { email = it },
@@ -123,7 +126,7 @@ fun ResetPasswordButton(
         backgroundColor = MaterialTheme.colors.primary,
         modifier = Modifier
             .padding(horizontal = 24.dp)
-            .padding(bottom = 16.dp, top = 24.dp)
+            .padding(bottom = 16.dp, top = 16.dp)
             .fillMaxWidth()
     ) {
         when (viewState) {
@@ -156,19 +159,6 @@ fun ResetPasswordButton(
     }
 }
 
-
-@Composable
-fun ResetPasswordLabel() {
-        Text(
-            text = stringResource(R.string.reset_password),
-            style = MaterialTheme.typography.h3,
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-            modifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding(bottom = 24.dp, top = 24.dp)
-        )
-}
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable

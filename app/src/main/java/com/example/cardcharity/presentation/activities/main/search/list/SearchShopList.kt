@@ -47,8 +47,6 @@ fun ColumnScope.SearchingShopList(
             }
         )
     }
-
-
 }
 
 @OptIn(ExperimentalMaterialApi::class)

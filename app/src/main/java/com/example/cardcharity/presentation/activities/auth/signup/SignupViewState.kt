@@ -37,7 +37,6 @@ enum class Locale {
     CONFIRM
 }
 
-
 fun default() = Default
 
 fun success() = Success

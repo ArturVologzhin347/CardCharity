@@ -36,7 +36,6 @@ abstract class BaseActivity : ComponentActivity() {
                 Screen()
             }
         }
-
     }
 
     @Composable

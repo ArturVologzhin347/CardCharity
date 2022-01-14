@@ -57,8 +57,4 @@ val dark_inverseOnSurface = Color(0xFF1a1c1e)
 val dark_inverseSurface = Color(0xFFe2e2e5)
 val dark_inversePrimary = Color(0xFF006493)
 val dark_shadow = Color(0xFF000000)
-val seed = Color(0xFF1179ad)
-val error = Color(0xFFba1b1b)
-
-
 

@@ -48,7 +48,7 @@ fun MainShopList(
 
                         //Divider if next item is label
                         shops.getOrNull(index + 1).let {
-                            if(it is ShopListModel.LabelModel) {
+                            if (it is ShopListModel.LabelModel) {
                                 Divider(modifier = Modifier.padding(start = 56.dp))
                             }
                         }

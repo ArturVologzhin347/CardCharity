@@ -30,6 +30,3 @@ fun loginWithGoogle() = LoginWithGoogle
 fun forgotPassword(email: String) = ForgotPassword(email)
 
 fun signup() = Signup
-
-
-

@@ -29,6 +29,10 @@
         </activity>
 
         <activity
+            android:name=".presentation.activities.welcome.WelcomeActivity"
+            android:theme="@style/AppTheme.Fullscreen" />
+
+        <activity
             android:name=".presentation.activities.auth.login.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
 
@@ -46,8 +50,6 @@
 
 
         <activity android:name=".presentation.activities.main.MainActivity" />
-        <activity android:name=".presentation.activities.welcome.WelcomeActivity" />
         <activity android:name=".presentation.activities.settings.SettingsActivity" />
-        <activity android:name=".presentation.activities.about.AboutActivity" />
     </application>
 </manifest>

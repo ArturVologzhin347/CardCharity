@@ -3,14 +3,11 @@
     <string name="app_name">Card Charity</string>
 
     <string name="lorem_ipsum">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
-
-
-
-
     <string name="select_shop">Select shop:</string>
 
     <string name="ok">OK</string>
     <string name="or">Or</string>
+    <string name="to">to</string>
     <string name="back">Back</string>
     <string name="refresh">Refresh</string>
     <string name="search">Search</string>
@@ -19,12 +16,9 @@
     <string name="send_mail">Send mail</string>
     <string name="mail_was_sent_to">The mail was sent to</string>
 
-
     <string name="not_found">Not found</string>
     <string name="the_shop_with_name">The shop with the name</string>
     <string name="was_not_found">was not found.</string>
-
-
 
     <string name="settings">Settings</string>
     <string name="appearance">Appearance</string>
@@ -35,9 +29,8 @@
     <string name="about_app">About Card Charity</string>
     <string name="reset_password">Reset password</string>
 
-
     <string name="welcome_back">Welcome back</string>
-    <string name="to">to</string>
+    <string name="welcome">Welcome</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="log_in">Log In</string>
     <string name="login">Login</string>
@@ -46,7 +39,7 @@
     <string name="signup">Signup</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_out">Sign Out</string>
-    <string name="sign_out_help">Are you sure you want to log out of your account? This will automatically clear the application cache.</string>
+    <string name="sign_out_help">Are you sure you want to log out of Your account? This will automatically clear the application cache.</string>
     <string name="sign_out_from_your_account">Sign out of Your account</string>
     <string name="create_account">Create account</string>
 
@@ -59,22 +52,22 @@
     <string name="show_code">Show QR code</string>
 
 
-
     <string name="password_old">Old password</string>
     <string name="password_new">Your new password</string>
     <string name="password_repeat">Repeat Your new password</string>
     <string name="reset">Reset</string>
     <string name="reset_text">We will send an mail for reset Your password to the this email address.</string>
-
-
-    <!--TODO-->
     <string name="reset_email_send">Email was sent</string>
-    <string name="reset_email_send_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 
+    <string name="welcome_text_1">A project created to make charity accessible to everyone.</string>
+    <string name="welcome_text_2">Our program is available to everyone: anyone can get help, or provide it to others.</string>
+    <string name="how_it_works">How it works?</string>
+    <string name="step">Step</string>
 
-
-
-
+    <string name="step_1_text">The needy leave an application for participation in the project. Now they can get help from you!</string>
+    <string name="step_2_text">We generate a QR code that is directly related to one of the participants in the Card Charity program, selected at random.</string>
+    <string name="step_3_text">When buying, you show the QR code to the cashier, thereby getting a discount*, and accumulative points are credited to the participant.</string>
+    <string name="step_3_text_helper">* Depends on the bonus program of the shop.</string>
 
     <string name="time_morning">Good morning</string>
     <string name="time_afternoon">Good day</string>
@@ -84,7 +77,6 @@
 
 
     <string name="error_unknown">Unknown error, try again later.</string>
-
     <string name="error_email_invalid">Invalid email address.</string>>
     <string name="error_email_empty">Email address cannot be empty.</string>
     <string name="error_password_empty">Password cannot be empty.</string>
@@ -94,9 +86,7 @@
     <string name="error_user_already_exists">User already exists.</string>
     <string name="error_password_mismatch">Password mismatch.</string>
 
-
-
-    <string name="oops">Oops, we are f****d up!</string>
+    <string name="oops">Oops!</string>
     <string name="error_unexpected_message">An unknown error has occurred. Please try again later.</string>
 
     <string name="error_server">Server Error 404</string>
@@ -106,13 +96,9 @@
     <string name="error_network_message">Check your network connection, try again later.</string>
 
 
-
     <string name="error_password_old_wrong">Wrong old password, please try again.</string>
     <string name="error_password_new_invalid">Your new password must be at least 6 characters.</string>
     <string name="error_repeated_password_invalid">Password mismatch. Please try again.</string>
-
-
-
 
 
     <string name="login_google_failed">Google login is failed.</string>

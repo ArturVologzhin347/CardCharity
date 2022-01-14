@@ -32,9 +32,7 @@ fun SplashScreen() {
                     .size(256.dp)
                     .align(Alignment.Center)
             )
-
         }
-
     }
 }
 

@@ -22,10 +22,8 @@ class Preferences @Inject constructor(private val store: PreferencesStore) {
         }
 
 
-    //TODO
     fun setupDefaultValues() {
         if (!defaultValuesInitialized) {
-            hasVisited = true //TODO
             theme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 DarkThemeManager.Theme.AUTO
             } else {

@@ -87,7 +87,6 @@ fun SignupScreen(
 
                 VerticalSpace(24.dp)
 
-
                 val isConfirmError = viewState.failOrNot(Locale.CONFIRM)
                 LaunchedEffect(isConfirmError) {
                     if (isConfirmError) {
@@ -120,23 +119,11 @@ fun SignupScreen(
                         )
                     }
                 )
-
-                UnderButtonText()
             }
         }
     }
 }
 
-
-@Composable
-fun UnderButtonText() {
-    Text(
-        text = stringResource(R.string.lorem_ipsum),
-        style = MaterialTheme.typography.caption,
-        textAlign = TextAlign.Center,
-        modifier = Modifier.padding(all = 24.dp)
-    )
-}
 
 @Composable
 fun SignupButton(

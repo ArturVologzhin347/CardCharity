@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -53,8 +54,7 @@ import timber.log.Timber
 fun MainBottomSheet(
     shop: Shop?,
     user: User?,
-    onClose: () -> Unit,
-    enableSystemBarAdaptive: Boolean = true
+    onClose: () -> Unit
 ) {
 
     if (shop == null || user == null) {
@@ -119,8 +119,7 @@ fun MainBottomSheet(
                 elevation = 16.dp,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier
-                    .padding(horizontal = 56.dp)
-                    .padding(top = 56.dp, bottom = 56.dp)
+                    .padding(all = 56.dp)
                     .aspectRatio(1F)
                     .fillMaxWidth()
             ) {
@@ -156,21 +155,6 @@ fun MainBottomSheet(
                             .fillMaxSize()
                     )
                 }
-            }
-
-            Text(
-                text = stringResource(R.string.show_code),
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onBackground.copy(alpha = 0.72F),
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-
-            VerticalSpace(56.dp)
-
-
-            if(enableSystemBarAdaptive) {
-                VerticalSpace(context.getNavigationBarHeight().dp)
             }
         }
     }
